@@ -1,51 +1,44 @@
 package applicationV1.modele;
 
-public class Tourelle {
-	private int x,y;
-	protected Environnement env;
-	public static int compteur=0;
-	private String id;
+public class Tourelle extends Acteur{
 	private int dégats;
 	private int portée;
+
+	public Tourelle(int x, int y, int deg, int port, Environnement env) {
+		// Création d'une tourelle sur une position donnée.
+		super(x, y, env);
+		this.dégats = deg;
+		this.portée = port;
+		// TODO Auto-generated constructor stub
+	}
 	
-	public Tourelle(int x, int y, int dégats, int portée, Environnement env) {
-		this.x=x;
-		this.y=y;
-		this.env=env;
-		this.dégats = dégats;
-		this.portée = portée;
-		this.id="#"+compteur;
-		compteur++;
+	public Tourelle(int deg, int port, Environnement env) {
+		// Création d'une tourelle avec un position aléatoire
+		super(env);
+		this.dégats = deg;
+		this.portée = port;
+		// TODO Auto-generated constructor stub
 	}
 	
 	public boolean aPortée(Ennemi e) {
-		if(e.getX() < (getX()+getPortée()) && e.getX() > (getX()-getPortée()) && e.getY() < (getY()+getPortée()) && e.getX() > (getY()-getPortée())) {
+		// La méthode sert à savoir si une tourelle a un ennemi donné à portée
+		if(e.getX() < getX() + this.portée && e.getY() < getY() + this.portée && e.getX() > getX() - this.portée && e.getY() > getY() - portée) {
 			return true;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
 	
-	public int getDegats() {
-		return this.dégats;
+	public void attaquer(Ennemi e) {
+		e.perdreHp(this.dégats);
+		System.out.println();
+		System.out.println(e + " a perdu " + this.dégats + " HP");
 	}
-	
-	public int getPortée() {
-		return this.portée;
+
+	@Override
+	public String toString() {
+		return "Tourelle [dégats=" + dégats + ", portée=" + portée + super.toString() + "]";
 	}
-	
-	public int getX() {
-		return this.x;
-	}
-	
-	public int getY() {
-		return this.y;
-	}
-	
-	public void setX(int n) {
-		this.x = n;
-	}
-	
-	public void setY(int n) {
-		this.y = n;
-	}
+
 }

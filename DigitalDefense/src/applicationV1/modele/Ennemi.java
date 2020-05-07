@@ -2,125 +2,77 @@ package applicationV1.modele;
 
 import java.util.Random;
 
-//import javafx.beans.property.IntegerProperty;
-//import javafx.beans.property.SimpleIntegerProperty;
+public class Ennemi extends Acteur{
+	private int vitesse;
+	private int direction;
+	private int hp;
 
-public class Ennemi {
-	private int x,y;
-	private int v; // vitesse de deplacement
-	private int dx,dy ;// direction 
-	protected Environnement env;
-	public static int compteur=0;
-	private String id;
-	private int pv;
-	
-	public Ennemi(int x, int y, int v, Environnement env,int pv) {
-		this.pv=pv;
-		this.x=x;
-		this.y=y;
-		this.v = v;
-		this.env=env;	
-		this.id="#"+compteur;
-		compteur++;
-		this.tirerDirection();
-	}
-
-	public Ennemi( int v, Environnement env, int pv) {
-		this.pv=pv;
-		Random random=new Random();
-		int x = random.nextInt(env.getWidth()-1);
-		int y=random.nextInt(env.getHeight()-1);
-		this.x=x;
-		this.y=y;
-		this.v = v;
-		this.env=env;	
-		this.id="#"+compteur;
-		compteur++;
-		this.tirerDirection();
-		//System.out.println("y" + y + "x" +x);
-	}
-
-	public  int getX() {
-		return this.x;
-	}
-
-	public  void setX(int n){
-		this.x=n;
-	}
-
-	public  int getY() {
-		return this.y;
+	public Ennemi(int x, int y, int v, int d, int hp, Environnement env) {
+		// L'ennemi créé aura une position donnée, une direction donnée.
+		super(x, y, env);
+		this.vitesse = v;
+		this.direction = d;
+		this.hp = hp;
+		// TODO Auto-generated constructor stub
 	}
 	
-	public  void setY(int n){
-		this.y=n;
+	public Ennemi(int v, int hp, Environnement env) {
+		// L'ennemi créé aura une position aléatoire, une direction aléatoire.
+		super(env);
+		nouvelleDirection();
+		this.vitesse = v;
+		this.hp = hp;
+		// TODO Auto-generated constructor stub
 	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void decrementerPv(int n) {
-		this.pv-=n;	
-	}
-
-	public void incrementerPv(int n) {
-		this.pv+=n;	
-	}
-
-	public boolean estVivant() {
-		return this.pv>0;
-	}
-
-	public void meurt(){
-		this.pv=0;
-	}
-
-
-	private void tirerDirection(){
-		Random random=new Random();
-		int randomInt = random.nextInt(3);
-		dx=randomInt-1;
-		if(dx==0){
-			randomInt=random.nextInt(2)-1;
-			if(randomInt==0){
-				dy=-1;
+	
+	public void seDéplacer() {
+		// Cette méthode ne permet à l'ennemi de se déplacer que si la case sur laquelle il s'aprète à aller est disponible
+		int nposX;
+		int nposY;
+		do {
+			switch(direction) {
+			case 0:
+				nposX = this.getX();
+				nposY = this.getY()+1;
+			break;
+			case 1:
+				nposX = this.getX()+1;
+				nposY = this.getY();
+			break;
+			case 2:
+				nposX = this.getX();
+				nposY = this.getY()-1;
+			break;
+			case 3:
+				nposX = this.getX()-1;
+				nposY = this.getY();
+			break;
+			default:
+				nposX = -1;
+				nposY = -1;
 			}
-			else{
-				dy=1;
+			if(!this.env.positionValable(nposX, nposY)) {
+				nouvelleDirection();
 			}
-		}
-		else{
-			dy=random.nextInt(3)-1;
-		}
-	}
-	//permet de savoir si une action probabiliste se rÃ©alise 
-	public static boolean reussitProba(double pourcent){
-		double x= Math.random();
-		double pp=pourcent/100;
-		return (x<=pp);
+		}while(!this.env.positionValable(nposX, nposY));
+		setX(nposX);
+		setY(nposY);
 	}
 
-
-	public void seDeplace(){
-		// 20% de chance de changer de direction
-		// if(Math.random()*100< pourentageRepro )
-		if(reussitProba(20)) {
-			tirerDirection();
-		}
-		int nposX=this.getX()+(this.v*dx);
-		int nposY=this.getY()+(this.v*dy);
-		while(!env.dansTerrain(nposX, nposY)){
-			tirerDirection();
-			nposX=this.getX()+(this.v*dx);
-			nposY=this.getY()+(this.v*dy);
-		}
-		this.x=nposX;
-		this.y=nposY;		
+	public void nouvelleDirection() {
+		// 4 directions sont possibles 0 haut, 1 droite, 2 bas, 3 gauche.
+		Random random = new Random();
+		this.direction = random.nextInt(4); // attention cela génère un entier compris entre 0 et 3, le 4 est exclu.
+	}
+	
+	public void perdreHp(int degats) {
+		this.hp -= degats;
 	}
 
 	@Override
 	public String toString() {
-		return "x=" + x + ", y=" + y + ", id=" + id ;
+		return "Ennemi [vitesse=" + vitesse + ", direction=" + direction + ", hp=" + hp + super.toString() + "]";
 	}
+	
+
 }
