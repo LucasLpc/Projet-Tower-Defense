@@ -6,6 +6,7 @@ public class Essai {
 		Environnement env = new Environnement(5,5);
 		env.initTerrain();
 		env.afficherTerrain();
+		System.out.println();
 		Ennemi e = new EnnemiTypeBasic(2,2,env);
 		Ennemi e2 = new EnnemiTypeBasic(3,2,env);
 		env.ajouter(e);
@@ -13,6 +14,7 @@ public class Essai {
 		
 		for(int i=0;i<5;i++) {
 			env.refresh();
+			System.out.println();
 		}
 		
 		

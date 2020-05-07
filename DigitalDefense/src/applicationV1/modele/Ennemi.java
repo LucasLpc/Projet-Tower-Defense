@@ -2,8 +2,8 @@ package applicationV1.modele;
 
 import java.util.Random;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+//import javafx.beans.property.IntegerProperty;
+//import javafx.beans.property.SimpleIntegerProperty;
 
 public class Ennemi {
 	private int x,y;

@@ -2,22 +2,22 @@ package applicationV1.modele;
 
 import java.util.ArrayList;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+//import javafx.beans.property.IntegerProperty;
+//import javafx.beans.property.SimpleIntegerProperty;
+//import javafx.collections.FXCollections;
+//import javafx.collections.ObservableList;
 
 
 public class Environnement {
 
 	private ArrayList<Ennemi> ennemis;
-	private IntegerProperty nbToursProperty;
+	private int nbTours;
 	private int terrain[][];
 	
 	public Environnement(int x, int y) {
 		super();
-		this.nbToursProperty = new SimpleIntegerProperty(0);
-		this.ennemis= new ArrayList();
+		this.nbTours = 0 ;
+		this.ennemis = new ArrayList();
 		this.terrain = new int[x][y];
 	}
 	public void initTerrain() {
@@ -52,15 +52,11 @@ public class Environnement {
 	}
 
 	public final int getNbTours(){
-		return this.nbToursProperty.getValue();	
-	}
-	
-	public final IntegerProperty getNbToursProperty(){
-		return nbToursProperty;
+		return this.nbTours;	
 	}
 
 	public final void setNbTours(int n){
-		this.nbToursProperty.setValue(n);
+		this.nbTours = n;
 	}
 
 	public int getWidth() {
@@ -110,6 +106,6 @@ public class Environnement {
 				ennemis.remove(i);
 			}
 		}
-		this.nbToursProperty.setValue(this.nbToursProperty.getValue()+1);
+		this.nbTours = this.nbTours +1;
 	}
 }
