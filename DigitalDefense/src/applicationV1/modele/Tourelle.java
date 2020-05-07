@@ -38,7 +38,7 @@ public class Tourelle extends Acteur{
 
 	@Override
 	public String toString() {
-		return "Tourelle [dégats=" + dégats + ", portée=" + portée + super.toString() + "]";
+		return "Tourelle [dégats=" + dégats + ", portée=" + portée + " " + super.toString() + "]";
 	}
 
 }

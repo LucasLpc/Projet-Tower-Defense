@@ -68,10 +68,19 @@ public class Ennemi extends Acteur{
 	public void perdreHp(int degats) {
 		this.hp -= degats;
 	}
+	
+	public boolean estMort() {
+		if(this.hp <= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 	@Override
 	public String toString() {
-		return "Ennemi [vitesse=" + vitesse + ", direction=" + direction + ", hp=" + hp + super.toString() + "]";
+		return "Ennemi [vitesse=" + vitesse + ", direction=" + direction + ", hp=" + hp + " " + super.toString() + "]";
 	}
 	
 

@@ -34,11 +34,6 @@ public class Acteur {
 		this.y = random.nextInt(env.getHauteur());
 	}
 	
-	@Override
-	public String toString() {
-		return "Acteur [x=" + x + ", y=" + y + ", env=" + env + ", id=" + id + "]";
-	}
-	
 	public int getX() {
 		return this.x;
 	}
@@ -53,5 +48,10 @@ public class Acteur {
 	
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	@Override
+	public String toString() {
+		return "Acteur [x=" + x + ", y=" + y + ", env=" + env + ", id=" + id + "]";
 	}
 }

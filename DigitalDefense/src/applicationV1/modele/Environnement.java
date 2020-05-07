@@ -39,11 +39,19 @@ public class Environnement {
 	
 	public void unTour() {
 		// Cette méthode permet le déroulé d'un tour de jeu (attention ici un tour de jeu désigne 1 action par acteur, déplacement ou attaquer)
-		// A remarquer : cette méthode rafraichi également le terrain, cela permet que le déplacement soit pris en compte par l'environnement.
+		// A remarquer : cette méthode rafraichi également le terrain, cela permet que le déplacement et les morts soient pris en compte par l'environnement.
 		for(int i = 0; i < getNbEnnemis(); i++) {
-			this.terrain[this.ennemis.get(i).getX()][this.ennemis.get(i).getY()] = 1;
-			this.ennemis.get(i).seDéplacer();
-			this.terrain[this.ennemis.get(i).getX()][this.ennemis.get(i).getY()] = 2;
+			if(this.ennemis.get(i).estMort()) {
+				this.terrain[this.ennemis.get(i).getX()][this.ennemis.get(i).getY()] = 1;
+				System.out.println();
+				System.out.println(this.ennemis.get(i) + " est mort");
+				this.ennemis.remove(i);
+			}
+			else {
+				this.terrain[this.ennemis.get(i).getX()][this.ennemis.get(i).getY()] = 1;
+				this.ennemis.get(i).seDéplacer();
+				this.terrain[this.ennemis.get(i).getX()][this.ennemis.get(i).getY()] = 2;
+			}
 		}
 		for(int i = 0; i < getNbTourelles(); i++) {
 			for(int j = 0; j < getNbEnnemis(); j++) {
