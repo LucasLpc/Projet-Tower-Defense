@@ -1,5 +1,4 @@
-/*
-package applicationV1.main;
+package applicationV1;
 
 import java.io.File;
 import java.net.URL;
@@ -28,4 +27,3 @@ public class MainODD extends Application {
 		launch(args);
 	}
 }
-*/
