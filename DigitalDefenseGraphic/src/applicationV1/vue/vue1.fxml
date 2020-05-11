@@ -1,23 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationV1.controleur.Controleur">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="589.0" prefWidth="774.0" styleClass="background" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationV1.controleur.Controleur">
    <center>
-      <TilePane prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER">
+      <TilePane fx:id="tileMap" prefHeight="362.0" prefWidth="534.0" styleClass="background" BorderPane.alignment="CENTER">
          <children>
             <Label text="Digital Defense" />
          </children>
       </TilePane>
    </center>
    <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="encadre" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="encadre" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="90.0" prefWidth="118.0">
+               <children>
+                  <Label text="nbr d'ennemi(s)" />
+                  <Label text="0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="90.0" prefWidth="119.0">
+               <children>
+                  <Label text="nbr de tourelle(s)" />
+                  <Label text="0" />
+               </children>
+            </VBox>
+         </children></HBox>
    </bottom>
    <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="encadre" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="235.0" prefWidth="182.0" styleClass="encadre" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <CheckBox fx:id="checkBox_nbEnnemiAAjouter" mnemonicParsing="false" text="Ennemi" textFill="WHITE" />
+                  <CheckBox fx:id="checkBox_nbTourelleAAjouter" mnemonicParsing="false" text="Tourelle" textFill="WHITE" />
+                  <HBox prefHeight="14.0" prefWidth="115.0" />
+                  <Label text="Nombre" textFill="WHITE" />
+                  <TextField fx:id="txt_nbActeurAAjouter" prefHeight="14.0" prefWidth="84.0" />
+                  <Button mnemonicParsing="false" onAction="#ajouterActeur" text="Ajouter" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#runModel" text="Run" />
+               </children>
+            </VBox>
+         </children></VBox>
    </right>
 </BorderPane>

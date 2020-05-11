@@ -60,6 +60,7 @@ public class Environnement {
 				}
 			}
 		}
+		this.nbTours += 1;
 	}
 	
 	public void ajouterTourelle(Tourelle t) {
@@ -116,6 +117,14 @@ public class Environnement {
 	
 	public ArrayList<Tourelle> getTourelles(){
 		return this.tourelles;
+	}
+	
+	public int getCase(int x, int y) {
+		return this.terrain[x][y];
+	}
+	
+	public int[][] getTerrain(){
+		return this.terrain;
 	}
 	
 	@Override
