@@ -46,15 +46,19 @@ public class Controleur implements Initializable{
     @FXML
     void ajouterActeur(ActionEvent event) {
     	if(checkBox_nbEnnemiAAjouter.isSelected()) {
-			Ennemi e = new Ennemi(10, 10, this.env);
-    		this.env.ajouterEnnemi(e);
-    		creerSprite(e);
+    		for(int i=0;i<Integer.parseInt(txt_nbActeurAAjouter.getText());i++) {
+    			Ennemi e = new Ennemi(10, 10, this.env);
+    			this.env.ajouterEnnemi(e);
+    			creerSprite(e);
+    		}
     	}
     	
     	if(checkBox_nbTourelleAAjouter.isSelected()) {
-			Tourelle t = new Tourelle(1,100,this.env);
-    		this.env.ajouterTourelle(t);
-    		creerSprite(t);
+    		for(int i=0;i<Integer.parseInt(txt_nbActeurAAjouter.getText());i++) {
+    			Tourelle t = new Tourelle(1,100,this.env);
+    			this.env.ajouterTourelle(t);
+    			creerSprite(t);
+    		}
     	}
     }
 
