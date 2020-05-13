@@ -6,9 +6,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import applicationV1.modele.*;
@@ -24,8 +26,8 @@ public class Controleur implements Initializable{
     private URL location;
 
     @FXML
-    private Pane pane_map;
-
+    private TilePane tileMap;
+    
     @FXML
     private CheckBox checkBox_nbEnnemiAAjouter;
 
@@ -55,8 +57,29 @@ public class Controleur implements Initializable{
     	this.env.unTour();
     }
     
-    void afficherTuile() {
-    	
+    void créerSprite(){
+    	for(int i = 0; i < env.getTerrain().length; i++) {
+    		for(int j = 0; j < env.getTerrain()[0].length; j++) {
+    			this.tileMap.getChildren().add(imageDe(env.getTerrain()[i][j]));
+    		}
+    	}
+    }
+    
+   public ImageView imageDe(int n){
+        switch (n){
+            case 0 :
+                ImageView tuile0 = new ImageView("src/ressources/brick.png");
+                return tuile0;
+            case 1 :
+                ImageView tuile1 = new ImageView("src/ressources/vide.png");
+                return tuile1;
+            case 2 :
+            	return null;
+            case 3 :
+            	return null;
+            default :
+            	return null;
+        }
     }
 
 	@Override

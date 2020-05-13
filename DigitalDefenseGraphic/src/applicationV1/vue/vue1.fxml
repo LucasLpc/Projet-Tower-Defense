@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="589.0" prefWidth="774.0" styleClass="background" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationV1.controleur.Controleur">
@@ -48,6 +48,6 @@
          </children></VBox>
    </right>
    <center>
-      <Pane fx:id="pane_map" prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER" />
+      <TilePane fx:id="tileMap" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
