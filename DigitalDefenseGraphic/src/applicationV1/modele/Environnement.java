@@ -18,6 +18,7 @@ public class Environnement {
 	
 	public void initTerrain() {
 		// Remplissage du tableau qui représente le terrain (ici les bords sont des murs).
+		// !! il faudrait modifier le terrain un utilisant map.txt
 		for(int i=0; i<this.terrain.length;i++) {
 			for(int j=0; j<this.terrain[i].length;j++) {
 				if(i!=0 && i!=this.terrain.length-1 && j!=this.terrain[i].length-1 && j!=0) 

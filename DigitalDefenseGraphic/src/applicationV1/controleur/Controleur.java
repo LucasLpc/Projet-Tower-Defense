@@ -10,9 +10,12 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import applicationV1.modele.*;
 
 public class Controleur implements Initializable{
@@ -29,6 +32,9 @@ public class Controleur implements Initializable{
     private TilePane tileMap;
     
     @FXML
+    private Pane spritePane;
+    
+    @FXML
     private CheckBox checkBox_nbEnnemiAAjouter;
 
     @FXML
@@ -42,12 +48,14 @@ public class Controleur implements Initializable{
     	if(checkBox_nbEnnemiAAjouter.isSelected()) {
 			Ennemi e = new Ennemi(10, 10, this.env);
     		this.env.ajouterEnnemi(e);
+    		creerSprite(e);
     		System.out.println("ajout ennemi");
     	}
     	
     	if(checkBox_nbTourelleAAjouter.isSelected()) {
-			Tourelle t = new Tourelle(10,10,this.env);
+			Tourelle t = new Tourelle(1,100,this.env);
     		this.env.ajouterTourelle(t);
+    		creerSprite(t);
     		System.out.println("ajout tourelle");
     	}
     }
@@ -57,7 +65,7 @@ public class Controleur implements Initializable{
     	this.env.unTour();
     }
     
-    void créerSprite(){
+    void initTiles(){
     	for(int i = 0; i < env.getTerrain().length; i++) {
     		for(int j = 0; j < env.getTerrain()[0].length; j++) {
     			this.tileMap.getChildren().add(imageDe(env.getTerrain()[i][j]));
@@ -65,22 +73,38 @@ public class Controleur implements Initializable{
     	}
     }
     
-   public ImageView imageDe(int n){
-        switch (n){
-            case 0 :
-                ImageView tuile0 = new ImageView("ressources/brick.png");
-                return tuile0;
-            case 1 :
-                ImageView tuile1 = new ImageView("ressources/wood.png");
-                return tuile1;
-            case 2 :
-            	return null;
-            case 3 :
-            	return null;
-            default :
-            	return null;
+    void creerSprite(Acteur a) {
+        Shape r;
+        if(a instanceof Ennemi) {
+            r = new Rectangle(10, 10);
+            r.setFill(Color.RED);
         }
+        else {
+            r = new Circle(6);
+            r.setFill(Color.BLUE);
+        }
+        r.setOnMouseClicked((e) -> System.out.println(a));
+        r.translateXProperty().bind(a.getX64Property());
+        r.translateYProperty().bind(a.getY64Property());
+        this.spritePane.getChildren().add(r);
     }
+    
+	public ImageView imageDe(int n) {
+		switch (n) {
+		case 0:
+			ImageView tuile0 = new ImageView("ressources/brick.png");
+			return tuile0;
+		case 1:
+			ImageView tuile1 = new ImageView("ressources/wood.png");
+			return tuile1;
+		case 2:
+			return null;
+		case 3:
+			return null;
+		default:
+			return null;
+		}
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -88,7 +112,7 @@ public class Controleur implements Initializable{
 		System.out.println("initialisation");
 		this.env = new Environnement(10,10);
 		this.env.initTerrain();
-		créerSprite();
+		initTiles();
 	}
 
 }

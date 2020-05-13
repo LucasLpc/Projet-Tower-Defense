@@ -6,27 +6,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="589.0" prefWidth="774.0" styleClass="background" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationV1.controleur.Controleur">
-   <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="encadre" BorderPane.alignment="CENTER">
-         <children>
-            <VBox prefHeight="90.0" prefWidth="118.0">
-               <children>
-                  <Label text="nbr d'ennemi(s)" />
-                  <Label text="0" />
-               </children>
-            </VBox>
-            <VBox prefHeight="90.0" prefWidth="119.0">
-               <children>
-                  <Label text="nbr de tourelle(s)" />
-                  <Label text="0" />
-               </children>
-            </VBox>
-         </children></HBox>
-   </bottom>
+<BorderPane styleClass="background" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationV1.controleur.Controleur">
    <right>
       <VBox prefHeight="235.0" prefWidth="182.0" styleClass="encadre" BorderPane.alignment="CENTER">
          <children>
@@ -48,6 +32,10 @@
          </children></VBox>
    </right>
    <center>
-      <TilePane fx:id="tileMap" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="spritePane" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+         <children>
+            <TilePane fx:id="tileMap" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" />
+         </children>
+      </Pane>
    </center>
 </BorderPane>
