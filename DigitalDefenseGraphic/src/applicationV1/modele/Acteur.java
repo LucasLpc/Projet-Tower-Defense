@@ -11,7 +11,7 @@ public class Acteur {
 	protected Environnement env;
 	public static int compteur=0;
 	private String id;
-	
+
 	public Acteur(int x, int y, Environnement env) {
 		this.x.setValue(x);
 		this.y.setValue(y);
@@ -31,7 +31,7 @@ public class Acteur {
 		this.id="#"+compteur;
 		compteur++;
 	}
-	
+
 	public void nouvellePosition() {
 		// Methode permettant de reroll la position aléatoire dans le cas ou la précédante n'est pas voulue (case deja occupée ou inaccesible).
 		Random random=new Random();
@@ -53,6 +53,10 @@ public class Acteur {
 	
 	public final void setY(int y) {
 		this.y.setValue(y);
+	}
+	
+	public String getId() {
+		return this.id;
 	}
 	
 	public final IntegerProperty xProperty() {

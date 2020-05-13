@@ -6,17 +6,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="589.0" prefWidth="774.0" styleClass="background" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationV1.controleur.Controleur">
-   <center>
-      <TilePane fx:id="tileMap" prefHeight="362.0" prefWidth="534.0" styleClass="background" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Digital Defense" />
-         </children>
-      </TilePane>
-   </center>
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="encadre" BorderPane.alignment="CENTER">
          <children>
@@ -54,4 +47,7 @@
             </VBox>
          </children></VBox>
    </right>
+   <center>
+      <Pane fx:id="pane_map" prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
