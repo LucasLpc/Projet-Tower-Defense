@@ -68,10 +68,10 @@ public class Controleur implements Initializable{
    public ImageView imageDe(int n){
         switch (n){
             case 0 :
-                ImageView tuile0 = new ImageView("src/ressources/brick.png");
+                ImageView tuile0 = new ImageView("ressources/brick.png");
                 return tuile0;
             case 1 :
-                ImageView tuile1 = new ImageView("src/ressources/vide.png");
+                ImageView tuile1 = new ImageView("ressources/wood.png");
                 return tuile1;
             case 2 :
             	return null;
@@ -86,8 +86,9 @@ public class Controleur implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		System.out.println("initialisation");
-		this.env = new Environnement(50,30);
+		this.env = new Environnement(10,10);
 		this.env.initTerrain();
+		créerSprite();
 	}
 
 }

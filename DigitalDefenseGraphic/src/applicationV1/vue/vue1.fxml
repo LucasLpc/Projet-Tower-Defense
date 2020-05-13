@@ -48,6 +48,6 @@
          </children></VBox>
    </right>
    <center>
-      <TilePane fx:id="tileMap" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <TilePane fx:id="tileMap" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
