@@ -59,11 +59,11 @@ public class Acteur {
 		return this.id;
 	}
 	
-	public final IntegerProperty xProperty() {
+	public final IntegerProperty getXProperty() {
 		return this.x;
 	}
 	
-	public final IntegerProperty yProperty() {
+	public final IntegerProperty getYProperty() {
 		return this.y;
 	}
 	

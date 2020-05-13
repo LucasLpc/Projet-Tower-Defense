@@ -2,17 +2,21 @@ package applicationV1.modele;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Environnement {
 
-	private ArrayList<Ennemi> ennemis;
-	private ArrayList<Tourelle> tourelles;
+	private ObservableList<Ennemi> ennemis;
+	private ObservableList<Tourelle> tourelles;
 	private int nbTours;
 	private int terrain[][];
 	
+	
 	public Environnement(int x, int y) {
 		this.nbTours = 0 ;
-		this.ennemis = new ArrayList<Ennemi>();
-		this.tourelles = new ArrayList<Tourelle>();
+		this.ennemis = FXCollections.observableArrayList();
+		this.tourelles = FXCollections.observableArrayList();
 		this.terrain = new int[x][y];
 	}
 	
@@ -111,11 +115,11 @@ public class Environnement {
 		return this.tourelles.size();
 	}
 	
-	public ArrayList<Ennemi> getEnnemis() {
+	public ObservableList<Ennemi> getEnnemis() {
 		return this.ennemis;
 	}
 	
-	public ArrayList<Tourelle> getTourelles(){
+	public ObservableList<Tourelle> getTourelles(){
 		return this.tourelles;
 	}
 	
