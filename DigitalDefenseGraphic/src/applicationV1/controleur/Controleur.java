@@ -49,14 +49,12 @@ public class Controleur implements Initializable{
 			Ennemi e = new Ennemi(10, 10, this.env);
     		this.env.ajouterEnnemi(e);
     		creerSprite(e);
-    		System.out.println("ajout ennemi");
     	}
     	
     	if(checkBox_nbTourelleAAjouter.isSelected()) {
 			Tourelle t = new Tourelle(1,100,this.env);
     		this.env.ajouterTourelle(t);
     		creerSprite(t);
-    		System.out.println("ajout tourelle");
     	}
     }
 
@@ -68,7 +66,7 @@ public class Controleur implements Initializable{
     void initTiles(){
     	for(int i = 0; i < env.getTerrain().length; i++) {
     		for(int j = 0; j < env.getTerrain()[0].length; j++) {
-    			this.tileMap.getChildren().add(imageDe(env.getTerrain()[i][j]));
+    			this.tileMap.getChildren().add(obtenirImage(env.getTerrain()[i][j]));
     		}
     	}
     }
@@ -89,7 +87,7 @@ public class Controleur implements Initializable{
         this.spritePane.getChildren().add(r);
     }
     
-	public ImageView imageDe(int n) {
+	public ImageView obtenirImage(int n) {
 		switch (n) {
 		case 0:
 			ImageView tuile0 = new ImageView("ressources/brick.png");

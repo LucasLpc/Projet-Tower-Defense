@@ -43,6 +43,8 @@ public class Acteur {
 		Random random=new Random();
 		this.x.setValue(random.nextInt(env.getLargeur()));
 		this.y.setValue(random.nextInt(env.getHauteur()));
+		this.x64.setValue(64*this.getX()+32);
+		this.y64.setValue(64*this.getY()+32);
 	}
 	
 	public final int getX() {
