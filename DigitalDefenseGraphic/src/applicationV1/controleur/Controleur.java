@@ -9,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import applicationV1.modele.*;
@@ -54,6 +53,10 @@ public class Controleur implements Initializable{
     @FXML
     void runModel(ActionEvent event) {
     	this.env.unTour();
+    }
+    
+    void afficherTuile() {
+    	
     }
 
 	@Override
