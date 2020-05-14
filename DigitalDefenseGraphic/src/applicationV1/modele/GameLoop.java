@@ -5,7 +5,7 @@ public class GameLoop {
 	private boolean partieEnCours;
 	
 	public GameLoop() {
-		this.env = new Environnement (10, 10);
+		this.env = new Environnement ();
 		this.partieEnCours = false;
 	}
 	

@@ -50,9 +50,11 @@ public class Controleur implements Initializable{
     			Ennemi e = new Ennemi(10, 10, this.env);
     			this.env.ajouterEnnemi(e);
     			creerSprite(e);
+    			System.out.println(this.env.getCase(0, 1));
+    			System.out.println(this.env.getCase(0, 0));
+    			System.out.println(this.env.getCase(1, 1));
     		}
-    	}
-    	
+    	}   	
     	if(checkBox_nbTourelleAAjouter.isSelected()) {
     		for(int i=0;i<Integer.parseInt(txt_nbActeurAAjouter.getText());i++) {
     			Tourelle t = new Tourelle(1,100,this.env);
@@ -61,20 +63,17 @@ public class Controleur implements Initializable{
     		}
     	}
     }
-
     @FXML
     void runModel(ActionEvent event) {
     	this.env.unTour();
-    }
-    
+    }    
     void initTiles(){
     	for(int i = 0; i < env.getTerrain().length; i++) {
     		for(int j = 0; j < env.getTerrain()[0].length; j++) {
     			this.tileMap.getChildren().add(obtenirImage(env.getTerrain()[i][j]));
     		}
     	}
-    }
-    
+    }    
     void creerSprite(Acteur a) {
         Shape r;
         if(a instanceof Ennemi) {
@@ -89,31 +88,24 @@ public class Controleur implements Initializable{
         r.translateXProperty().bind(a.getX64Property());
         r.translateYProperty().bind(a.getY64Property());
         this.spritePane.getChildren().add(r);
-    }
-    
+    }  
 	public ImageView obtenirImage(int n) {
 		switch (n) {
-		case 0:
+		case 'v':
 			ImageView tuile0 = new ImageView("ressources/brick.png");
 			return tuile0;
-		case 1:
+		case 'c':
 			ImageView tuile1 = new ImageView("ressources/wood.png");
 			return tuile1;
-		case 2:
-			return null;
-		case 3:
-			return null;
 		default:
 			return null;
 		}
 	}
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		System.out.println("initialisation");
-		this.env = new Environnement(10,10);
-		this.env.initTerrain();
+		this.env = new Environnement();
 		initTiles();
 	}
 

@@ -51,10 +51,10 @@ public class Ennemi extends Acteur{
 				nposX = -1;
 				nposY = -1;
 			}
-			if(!this.env.positionValable(nposX, nposY)) {
+			if(!this.env.positionValableEnnemi(nposX, nposY)) {
 				nouvelleDirection();
 			}
-		}while(!this.env.positionValable(nposX, nposY));
+		}while(!this.env.positionValableEnnemi(nposX, nposY));
 		setX(nposX);
 		setY(nposY);
 	}

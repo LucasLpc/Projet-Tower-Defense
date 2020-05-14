@@ -7,41 +7,37 @@ public class Environnement {
 	private ArrayList<Ennemi> ennemis;
 	private ArrayList<Tourelle> tourelles;
 	private int nbTours;
-	private int terrain[][];
+	private char terrain[] = {'c','v','v','v','v','v','v','v','v','v',
+							'c','v','v','v','v','v','v','v','v','v',
+							'c','c','c','v','v','c','c','c','v','v',
+							'v','v','c','v','v','c','v','c','v','v',
+							'v','v','c','c','c','c','v','c','v','v',
+							'v','v','v','v','v','v','v','c','v','v',
+							'v','v','v','v','v','v','v','c','v','v',
+							'v','v','v','v','v','v','v','c','c','v',
+							'v','v','v','v','v','v','v','v','c','v',
+							'v','v','v','v','v','v','v','v','c','c'};
+	private char terrain2D[][] = tab2D(terrain,10,10);
 	
-	public Environnement(int x, int y) {
-		this.nbTours = 0 ;
+	public Environnement() {
 		this.ennemis = new ArrayList<Ennemi>();
 		this.tourelles = new ArrayList<Tourelle>();
-		this.terrain = new int[x][y];
 	}
-	
-	public void initTerrain() {
-		// Remplissage du tableau qui représente le terrain (ici les bords sont des murs).
-		// !! il faudrait modifier le terrain un utilisant map.txt
-		for(int i=0; i<this.terrain.length;i++) {
-			for(int j=0; j<this.terrain[i].length;j++) {
-				if(i!=0 && i!=this.terrain.length-1 && j!=this.terrain[i].length-1 && j!=0) 
-					this.terrain[i][j]=1;	
-				else this.terrain[i][j]=0;
+	private char[][] tab2D(char[] n, int ligne, int colonne) {
+		char[][] tab = new char[ligne][colonne];
+		int indice =0;
+		for(int i = 0; i < ligne; i++){
+			for(int j=0; j< colonne; j++ ){
+				tab[i][j] = n[indice];
+	          	indice++;
 			}
 		}
-	}
-	
-	public void afficherTerrain() {
-		for(int i = 0; i < getLargeur(); i++) {
-			System.out.println();
-			for(int j = 0; j < getHauteur(); j++) {
-				System.out.print(this.terrain[i][j] + " ");
-			}
-		}
-		System.out.println();
-	}
-
+		return tab;
+	 }
 	public void unTour() {
 		// Cette méthode permet le déroulé d'un tour de jeu (attention ici un tour de jeu désigne 1 action par acteur, déplacement ou attaquer)
 		// A remarquer : cette méthode rafraichi également le terrain, cela permet que le déplacement et les morts soient pris en compte par l'environnement.
-		for(int i = 0; i < getNbEnnemis(); i++) {
+		for(int i = 0; i < this.ennemis.size(); i++) {
 			if(this.ennemis.get(i).estMort()) {
 				System.out.println(this.ennemis.get(i) + " est mort");
 				this.ennemis.remove(i);
@@ -61,37 +57,38 @@ public class Environnement {
 	}
 
 	public void ajouterTourelle(Tourelle t) {
-		// Ici on ajoute une boucle qui oblige le nouvel objet à se positioner sur une case accesible.
-		do {
-			t.nouvellePosition();
-		}while(this.terrain[t.getX()][t.getY()] != 1);
 		this.tourelles.add(t);
 	}
-	
 	public void ajouterEnnemi(Ennemi e) {
-		// Ici on ajoute une boucle qui oblige le nouvel objet à se positioner sur une case accesible.
-		do {
-			e.nouvellePosition();
-		}while(this.terrain[e.getX()][e.getY()] != 1);
 		this.ennemis.add(e);
 	}
+	public void PosAléatoire(Acteur a) {
+		if(a instanceof Ennemi) {
+			do {
+				a.nouvellePosition();
+			}while(this.terrain2D[a.getX()][a.getY()] != 'v');
+		}
+		if(a instanceof Tourelle) {
+			do {
+				a.nouvellePosition();
+			}while(this.terrain2D[a.getX()][a.getY()] != 'c');
+		}
+	}
 
-	public boolean positionValable(int x, int y) {
+	public boolean positionValableEnnemi(int x, int y) {
 		// cette méthode permet de savoir si un ennemi est autorisé a accéder à  cette position.
-		if(this.terrain[x][y] != 1) {
+		if(this.terrain2D[x+1][y+1] != 'c') {
 			return false;
 		}
-		else {
-			return true;
-		}
+		return true;
 	}
 
 	public int getLargeur() {
-		return this.terrain.length;
+		return this.terrain2D.length;
 	}
 
 	public int getHauteur() {
-		return this.terrain[0].length;
+		return this.terrain2D[0].length;
 	}
 
 	public int getNbActeurs(){
@@ -114,12 +111,12 @@ public class Environnement {
 		return this.tourelles;
 	}
 	
-	public int getCase(int x, int y) {
-		return this.terrain[x][y];
+	public char getCase(int x, int y) {
+		return this.terrain2D[x][y];
 	}
 	
-	public int[][] getTerrain(){
-		return this.terrain;
+	public char[][] getTerrain(){
+		return this.terrain2D;
 	}
 	
 	@Override
