@@ -6,6 +6,7 @@ public class Environnement {
 
 	private ArrayList<Ennemi> ennemis;
 	private ArrayList<Tourelle> tourelles;
+	private Base base;
 	private int nbTours;
 	private int terrain[][];
 	

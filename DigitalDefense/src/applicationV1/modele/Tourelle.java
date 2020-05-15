@@ -1,21 +1,19 @@
 package applicationV1.modele;
 
 public class Tourelle extends Acteur{
-	private int dégats;
+	
 	private int portée;
 
-	public Tourelle(int x, int y, int deg, int port, Environnement env) {
+	public Tourelle(int x, int y, int dégats, int portée, Environnement env) {
 		// Création d'une tourelle sur une position donnée.
-		super(x, y, env);
-		this.dégats = deg;
-		this.portée = port;
+		super(x, y, env, dégats);
+		this.portée = portée;
 		// TODO Auto-generated constructor stub
 	}
 	
 	public Tourelle(int deg, int port, Environnement env) {
 		// Création d'une tourelle avec un position aléatoire
 		super(env);
-		this.dégats = deg;
 		this.portée = port;
 		// TODO Auto-generated constructor stub
 	}
@@ -31,14 +29,14 @@ public class Tourelle extends Acteur{
 	}
 	
 	public void attaquer(Ennemi e) {
-		e.perdreHp(this.dégats);
+		e.perdreHp(getDégats());
 		System.out.println();
-		System.out.println(e + " a perdu " + this.dégats + " HP");
+		System.out.println(e + " a perdu " + getDégats() + " HP");
 	}
 
 	@Override
 	public String toString() {
-		return "Tourelle [dégats=" + dégats + ", portée=" + portée + " " + super.toString() + "]";
+		return "Tourelle [dégats=" + getDégats() + ", portée=" + portée + " " + super.toString() + "]";
 	}
 
 }

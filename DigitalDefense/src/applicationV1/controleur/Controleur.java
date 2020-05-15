@@ -18,13 +18,41 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 public class Controleur implements Initializable {
-	private Environnement envTest;
+	private Timeline gameLoop;
+	private Environnement map;
+	private int nbmanche;
+	//quand on aura fait le système d'argent et si on fait un système de points alors
+	/*
+	private int banque; <- venant des ennemis tués
+	private int point;
+	*/
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
-		this.envTest = new Environnement(300,300);
+		//this.envTest = new Environnement(300,300);
+		initAnimation();
+		gameLoop.play();
+		
+		
+	}
+	private void initAnimation() {
+		gameLoop = new Timeline();
+		gameLoop.setCycleCount(Timeline.INDEFINITE);
+		
+		KeyFrame fps = new KeyFrame(Duration.seconds(0.01), 
+				(eventEnding -> {
+					if(Environnement.base.getHP == 0) {
+						gameLoop.stop();
+					}
+				})
+				
+				);
+				
 		
 	}
 	

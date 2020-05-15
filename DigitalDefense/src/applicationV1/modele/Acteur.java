@@ -8,11 +8,13 @@ public class Acteur {
 	protected Environnement env;
 	public static int compteur=0;
 	private String id;
+	private int dégats;
 	
-	public Acteur(int x, int y, Environnement env) {
+	public Acteur(int x, int y, Environnement env, int dégats) {
 		this.x = x;
 		this.y = y;
 		this.env = env;
+		this.dégats = dégats;
 		this.id="#"+compteur;
 		compteur++;
 	}
@@ -48,6 +50,10 @@ public class Acteur {
 	
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public int getDégats() {
+		return this.dégats;
 	}
 	
 	@Override

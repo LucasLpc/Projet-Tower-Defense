@@ -3,13 +3,14 @@ package applicationV1.modele;
 import java.util.Random;
 
 public class Ennemi extends Acteur{
+	
 	private int vitesse;
 	private int direction;
 	private int hp;
 
-	public Ennemi(int x, int y, int v, int d, int hp, Environnement env) {
+	public Ennemi(int x, int y, int v, int d, int hp, Environnement env, int dégats) {
 		// L'ennemi créé aura une position donnée, une direction donnée.
-		super(x, y, env);
+		super(x, y, env,dégats);
 		this.vitesse = v;
 		this.direction = d;
 		this.hp = hp;
@@ -77,7 +78,7 @@ public class Ennemi extends Acteur{
 			return false;
 		}
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Ennemi [vitesse=" + vitesse + ", direction=" + direction + ", hp=" + hp + " " + super.toString() + "]";
