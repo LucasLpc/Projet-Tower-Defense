@@ -75,14 +75,12 @@ public class Controleur implements Initializable{
     	}
     }    
     void creerSprite(Acteur a) {
-        Shape r;
+        ImageView r;
         if(a instanceof Ennemi) {
-            r = new Rectangle(10, 10);
-            r.setFill(Color.RED);
+            r = new ImageView("ressources/lion.png");
         }
         else {
-            r = new Circle(6);
-            r.setFill(Color.BLUE);
+            r = new ImageView("ressources/tourelle_1.png");
         }
         r.setOnMouseClicked((e) -> System.out.println(a));
         r.translateXProperty().bind(a.getX64Property());
@@ -90,13 +88,14 @@ public class Controleur implements Initializable{
         this.spritePane.getChildren().add(r);
     }  
 	public ImageView obtenirImage(int n) {
+		ImageView tile;
 		switch (n) {
 		case 'v':
-			ImageView tuile0 = new ImageView("ressources/brick.png");
-			return tuile0;
+			tile = new ImageView("ressources/brick.png");
+			return tile;
 		case 'c':
-			ImageView tuile1 = new ImageView("ressources/wood.png");
-			return tuile1;
+			tile = new ImageView("ressources/wood.png");
+			return tile;
 		default:
 			return null;
 		}

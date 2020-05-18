@@ -1,6 +1,10 @@
 package applicationV1.modele;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Optional;
+import java.util.Queue;
 
 public class Environnement {
 
@@ -22,6 +26,16 @@ public class Environnement {
 	public Environnement() {
 		this.ennemis = new ArrayList<Ennemi>();
 		this.tourelles = new ArrayList<Tourelle>();
+	}
+	public boolean BFSPossible(int x,int y){
+		Noeud[][] terrain = null;
+		
+		for(int i=0; i<this.terrain2D.length; i++) {
+			for(int j=0;j<this.terrain2D[j].length; j++) {
+				terrain[i][j] = new Noeud(i,j);
+			}
+		}
+		
 	}
 	private char[][] tab2D(char[] n, int ligne, int colonne) {
 		char[][] tab = new char[ligne][colonne];
@@ -77,7 +91,7 @@ public class Environnement {
 
 	public boolean positionValableEnnemi(int x, int y) {
 		// cette méthode permet de savoir si un ennemi est autorisé a accéder à  cette position.
-		if(this.terrain2D[x+1][y+1] != 'c') {
+		if(this.terrain2D[x][y] != 'c') {
 			return false;
 		}
 		return true;
