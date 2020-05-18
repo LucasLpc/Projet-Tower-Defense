@@ -42,7 +42,7 @@ public class Controleur implements Initializable{
 
     @FXML
     private TextField txt_nbActeurAAjouter;
-    
+      
     @FXML
     void ajouterActeur(ActionEvent event) {
     	if(checkBox_nbEnnemiAAjouter.isSelected()) {
@@ -68,9 +68,9 @@ public class Controleur implements Initializable{
     	this.env.unTour();
     }    
     void initTiles(){
-    	for(int i = 0; i < env.getTerrain().length; i++) {
-    		for(int j = 0; j < env.getTerrain()[0].length; j++) {
-    			this.tileMap.getChildren().add(obtenirImage(env.getTerrain()[i][j]));
+    	for(int i = 0; i < this.env.getTerrain().length; i++) {
+    		for(int j = 0; j < this.env.getTerrain()[0].length; j++) {
+    			this.tileMap.getChildren().add(obtenirImage(this.env.getTerrain()[i][j]));
     		}
     	}
     }    
@@ -95,6 +95,15 @@ public class Controleur implements Initializable{
 			return tile;
 		case 'c':
 			tile = new ImageView("ressources/wood.png");
+			return tile;
+		case 't':
+			tile = new ImageView("ressources/tilePlacementTest.png");
+			tile.setOnMouseClicked((e) -> {
+				Tourelle t = new Tourelle((int)tile.getX(),(int)tile.getY(),1,100,this.env);
+				System.out.println(e.getX());
+				this.env.ajouterTourelle(t);
+				creerSprite(t);
+			});
 			return tile;
 		default:
 			return null;

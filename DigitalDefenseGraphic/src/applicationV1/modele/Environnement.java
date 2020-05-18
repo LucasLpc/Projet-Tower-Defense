@@ -14,12 +14,12 @@ public class Environnement {
 	private char terrain[] = {'c','v','v','v','v','v','v','v','v','v',
 							'c','v','v','v','v','v','v','v','v','v',
 							'c','c','c','v','v','c','c','c','v','v',
-							'v','v','c','v','v','c','v','c','v','v',
+							'v','t','c','v','v','c','t','c','v','v',
 							'v','v','c','c','c','c','v','c','v','v',
 							'v','v','v','v','v','v','v','c','v','v',
 							'v','v','v','v','v','v','v','c','v','v',
 							'v','v','v','v','v','v','v','c','c','v',
-							'v','v','v','v','v','v','v','v','c','v',
+							'v','v','v','v','v','v','v','t','c','v',
 							'v','v','v','v','v','v','v','v','c','c'};
 	private char terrain2D[][] = tab2D(terrain,10,10);
 	
@@ -27,12 +27,27 @@ public class Environnement {
 		this.ennemis = new ArrayList<Ennemi>();
 		this.tourelles = new ArrayList<Tourelle>();
 	}
-	public boolean BFSPossible(int x,int y){
+	public void BFS(int x,int y){
 		Noeud[][] terrain = null;
 		
-		for(int i=0; i<this.terrain2D.length; i++) {
-			for(int j=0;j<this.terrain2D[j].length; j++) {
+		for(int i=0; i<this.terrain2D.length; i++) 
+			for(int j=0;j<this.terrain2D[j].length; j++) 
 				terrain[i][j] = new Noeud(i,j);
+			
+		Queue<Noeud> file = new LinkedList();
+		while(!file.isEmpty()) {
+			file.remove();
+			if(this.terrain2D[x-1][y] == 'c') {
+				file.add(new Noeud(x-1,y));
+			}
+			if(this.terrain2D[x][y-1] == 'c') {
+				file.add(new Noeud(x,y-1));
+			}
+			if(this.terrain2D[x+1][y] == 'c') {
+				file.add(new Noeud(x+1,y));
+			}
+			if(this.terrain2D[x][y+1] == 'c') {
+				file.add(new Noeud(x,y+1));
 			}
 		}
 		
