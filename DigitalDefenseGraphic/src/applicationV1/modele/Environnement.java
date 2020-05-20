@@ -27,30 +27,50 @@ public class Environnement {
 		this.ennemis = new ArrayList<Ennemi>();
 		this.tourelles = new ArrayList<Tourelle>();
 	}
-	public void BFS(int x,int y){
+	public ArrayList<Noeud> BFS(int x,int y){
 		Noeud[][] terrain = null;
+		ArrayList<Noeud> chemin = new ArrayList<Noeud>();
 		
 		for(int i=0; i<this.terrain2D.length; i++) 
 			for(int j=0;j<this.terrain2D[j].length; j++) 
-				terrain[i][j] = new Noeud(i,j);
+				if(terrain2D[i][j] == 'c') terrain[i][j] = new Noeud(i,j,'c');
+				else terrain[i][j] = new Noeud(i,j,'v');
 			
-		Queue<Noeud> file = new LinkedList();
+		Queue<Noeud> file = new LinkedList<Noeud>();
+		file.add(terrain[x][y]);
 		while(!file.isEmpty()) {
-			file.remove();
-			if(this.terrain2D[x-1][y] == 'c') {
-				file.add(new Noeud(x-1,y));
-			}
-			if(this.terrain2D[x][y-1] == 'c') {
-				file.add(new Noeud(x,y-1));
-			}
-			if(this.terrain2D[x+1][y] == 'c') {
-				file.add(new Noeud(x+1,y));
-			}
-			if(this.terrain2D[x][y+1] == 'c') {
-				file.add(new Noeud(x,y+1));
+			Noeud noeud = file.remove();
+			chemin.add(noeud);
+			for(Noeud adjNoeud : noeud.adjacent) {
+				if(adjNoeud.getDistance() != 0) {
+					adjNoeud.incrDistance();
+					file.add(adjNoeud);
+				}
 			}
 		}
+		return chemin;
 		
+	}
+	private LinkedList<Noeud> adjacents(Noeud noeud){
+		LinkedList<Noeud> file = new LinkedList<>();
+		
+		if(noeud.getX()-1<0 || noeud.getY()-1<0 || noeud.getX()+1>this.terrain2D.length || noeud.getY()+1>this.terrain2D[0].length)
+			return null;
+		else {
+			if(this.terrain2D[noeud.getX()-1][noeud.getY()] == 'c') {
+				file.add(new Noeud(noeud.getX()-1,noeud.getY(),'c'));
+			}
+			if(this.terrain2D[noeud.getX()][noeud.getY()-1] == 'c') {
+				file.add(new Noeud(noeud.getX(),noeud.getY()-1,'c'));
+			}
+			if(this.terrain2D[noeud.getX()+1][noeud.getY()] == 'c') {
+				file.add(new Noeud(noeud.getX()+1,noeud.getY(),'c'));
+			}
+			if(this.terrain2D[noeud.getX()][noeud.getY()+1] == 'c') {
+				file.add(new Noeud(noeud.getX(),noeud.getY()+1,'c'));
+			}
+		}
+		return file;
 	}
 	private char[][] tab2D(char[] n, int ligne, int colonne) {
 		char[][] tab = new char[ligne][colonne];

@@ -99,8 +99,8 @@ public class Controleur implements Initializable{
 		case 't':
 			tile = new ImageView("ressources/tilePlacementTest.png");
 			tile.setOnMouseClicked((e) -> {
-				Tourelle t = new Tourelle((int)tile.getX(),(int)tile.getY(),1,100,this.env);
-				System.out.println(e.getX());
+				Tourelle t = new Tourelle((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,1,100,this.env);
+				System.out.println(tile.getLayoutX());
 				this.env.ajouterTourelle(t);
 				creerSprite(t);
 			});

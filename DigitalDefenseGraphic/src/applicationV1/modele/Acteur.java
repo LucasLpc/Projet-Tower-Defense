@@ -17,8 +17,8 @@ public class Acteur {
 	public Acteur(int x, int y, Environnement env) {
 		this.x = new SimpleIntegerProperty(x);
 		this.y = new SimpleIntegerProperty(y);
-		this.x64 = new SimpleIntegerProperty(x*64+32);
-		this.y64 = new SimpleIntegerProperty(y*64+32);
+		this.x64 = new SimpleIntegerProperty(x*64);
+		this.y64 = new SimpleIntegerProperty(y*64);
 		this.env = env;
 		this.id="#"+compteur;
 		compteur++;
@@ -31,8 +31,8 @@ public class Acteur {
 		int yRandom = random.nextInt(env.getHauteur());
 		this.x = new SimpleIntegerProperty(xRandom);
 		this.y = new SimpleIntegerProperty(yRandom);
-		this.x64 = new SimpleIntegerProperty(xRandom*64+32);
-		this.y64 = new SimpleIntegerProperty(yRandom*64+32);
+		this.x64 = new SimpleIntegerProperty(xRandom*64);
+		this.y64 = new SimpleIntegerProperty(yRandom*64);
 		this.env = env;
 		this.id="#"+compteur;
 		compteur++;
@@ -43,8 +43,8 @@ public class Acteur {
 		Random random=new Random();
 		this.x.setValue(random.nextInt(env.getLargeur()));
 		this.y.setValue(random.nextInt(env.getHauteur()));
-		this.x64.setValue(64*this.getX()+32);
-		this.y64.setValue(64*this.getY()+32);
+		this.x64.setValue(64*this.getX());
+		this.y64.setValue(64*this.getY());
 	}
 	
 	public final int getX() {
@@ -57,12 +57,12 @@ public class Acteur {
 	
 	public final void setX(int x) {
 		this.x.setValue(x);
-		this.x64.setValue(x*64+32);
+		this.x64.setValue(x*64);
 	}
 	
 	public final void setY(int y) {
 		this.y.setValue(y);
-		this.y64.setValue(y*64+32);
+		this.y64.setValue(y*64);
 	}
 	
 	public String getId() {
