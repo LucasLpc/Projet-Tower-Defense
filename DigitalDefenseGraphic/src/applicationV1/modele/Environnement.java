@@ -109,7 +109,7 @@ public class Environnement {
 			}
 		}
 	}
-	public void PosAléatoire(Acteur a) {
+	public void PosAleatoire(Acteur a) {
 		if(a instanceof Ennemi) {
 			do {
 				a.nouvellePosition();
@@ -123,7 +123,7 @@ public class Environnement {
 	}
 
 	public boolean positionValableEnnemi(int x, int y) {
-		// cette méthode permet de savoir si un ennemi est autorisé a accéder à  cette position.
+		// cette methode permet de savoir si un ennemi est autorise a acceder à  cette position.
 		if(this.terrain2D[x][y] != 'c') {
 			return false;
 		}

@@ -25,7 +25,7 @@ public abstract class Acteur {
 	}
 
 	public Acteur(Environnement env) {
-		// Méthothe permetant de générer un acteur avec une position aléatoire
+		// Methothe permetant de generer un acteur avec une position aleatoire
 		Random random=new Random();
 		int xRandom = random.nextInt(env.getLargeur());
 		int yRandom = random.nextInt(env.getHauteur());
@@ -39,7 +39,7 @@ public abstract class Acteur {
 	}
 
 	public void nouvellePosition() {
-		// Methode permettant de reroll la position aléatoire dans le cas ou la précédante n'est pas voulue (case deja occupée ou inaccesible).
+		// Methode permettant de reroll la position aleatoire dans le cas ou la precedante n'est pas voulue (case deja occupee ou inaccesible).
 		Random random=new Random();
 		this.x.setValue(random.nextInt(env.getLargeur()));
 		this.y.setValue(random.nextInt(env.getHauteur()));
