@@ -5,7 +5,7 @@ import java.util.Random;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Acteur {
+public abstract class Acteur {
 	private IntegerProperty x;
 	private IntegerProperty y;
 	private IntegerProperty x64;
@@ -46,6 +46,8 @@ public class Acteur {
 		this.x64.setValue(64*this.getX());
 		this.y64.setValue(64*this.getY());
 	}
+	
+	public abstract void agir();
 	
 	public final int getX() {
 		return this.x.getValue();

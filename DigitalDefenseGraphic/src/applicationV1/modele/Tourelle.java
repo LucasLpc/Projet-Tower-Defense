@@ -20,6 +20,19 @@ public class Tourelle extends Acteur{
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void agir() {
+		int j = 0;
+		do {
+			if(this.env.getNbEnnemis() > 0) {
+				if (this.aPortée(this.env.getEnnemis().get(j))) {
+					this.attaquer(this.env.getEnnemis().get(j));
+					j = this.env.getNbEnnemis();
+				}
+			}
+			j++;
+		}while(j < this.env.getNbEnnemis());
+	}
+	
 	public boolean aPortée(Ennemi e) {
 		// La méthode sert à savoir si une tourelle a un ennemi donné à portée
 		if(e.getX() < getX() + this.portée && e.getY() < getY() + this.portée && e.getX() > getX() - this.portée && e.getY() > getY() - portée) {

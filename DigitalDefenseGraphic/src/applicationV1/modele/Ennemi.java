@@ -8,7 +8,7 @@ public class Ennemi extends Acteur{
 	private int hp;
 
 	public Ennemi(int x, int y, int v, int d, int hp, Environnement env) {
-		// L'ennemi créé aura une position donnée, une direction donnée.
+		// L'ennemi crÃ©Ã© aura une position donnÃ©e, une direction donnÃ©e.
 		super(x, y, env);
 		this.vitesse = v;
 		this.direction = d;
@@ -17,7 +17,7 @@ public class Ennemi extends Acteur{
 	}
 	
 	public Ennemi(int v, int hp, Environnement env) {
-		// L'ennemi créé aura une position aléatoire, une direction aléatoire.
+		// L'ennemi crÃ©Ã© aura une position alÃ©atoire, une direction alÃ©atoire.
 		super(env);
 		nouvelleDirection();
 		this.vitesse = v;
@@ -25,8 +25,8 @@ public class Ennemi extends Acteur{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void seDéplacer() {
-		// Cette méthode ne permet à l'ennemi de se déplacer que si la case sur laquelle il s'aprète à aller est disponible
+	public void seDÃ©placer() {
+		// Cette mÃ©thode ne permet Ã  l'ennemi de se dÃ©placer que si la case sur laquelle il s'aprÃ¨te Ã  aller est disponible
 		int nposX;
 		int nposY;
 		do {
@@ -58,11 +58,20 @@ public class Ennemi extends Acteur{
 		setX(nposX);
 		setY(nposY);
 	}
+	
+	public void agir() {
+		if(estMort()) {
+			this.env.delEnnemi(this.getId());
+		}
+		else {
+			this.seDÃ©placer();
+		}
+	}
 
 	public void nouvelleDirection() {
 		// 4 directions sont possibles 0 haut, 1 droite, 2 bas, 3 gauche.
 		Random random = new Random();
-		this.direction = random.nextInt(4); // attention cela génère un entier compris entre 0 et 3, le 4 est exclu.
+		this.direction = random.nextInt(4); // attention cela gÃ©nÃ¨re un entier compris entre 0 et 3, le 4 est exclu.
 	}
 	
 	public void perdreHp(int degats) {

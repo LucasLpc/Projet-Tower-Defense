@@ -83,24 +83,15 @@ public class Environnement {
 		}
 		return tab;
 	 }
+	
 	public void unTour() {
-		// Cette méthode permet le déroulé d'un tour de jeu (attention ici un tour de jeu désigne 1 action par acteur, déplacement ou attaquer)
-		// A remarquer : cette méthode rafraichi également le terrain, cela permet que le déplacement et les morts soient pris en compte par l'environnement.
-		for(int i = 0; i < this.ennemis.size(); i++) {
-			if(this.ennemis.get(i).estMort()) {
-				System.out.println(this.ennemis.get(i) + " est mort");
-				this.ennemis.remove(i);
-			}
-			else {
-				this.ennemis.get(i).seDéplacer();
-			}
+		// Cette mï¿½thode permet le dï¿½roulï¿½ d'un tour de jeu (attention ici un tour de jeu dï¿½signe 1 action par acteur, dï¿½placement ou attaquer)
+		// A remarquer : cette mï¿½thode rafraichi ï¿½galement le terrain, cela permet que le dï¿½placement et les morts soient pris en compte par l'environnement.
+		for(int i = 0; i < getNbEnnemis(); i++) {
+			this.ennemis.get(i).agir();
 		}
-		for(int i = 0; i < getNbTourelles(); i++) {
-			for(int j = 0; j < getNbEnnemis(); j++) {
-				if(this.tourelles.get(i).aPortée(this.ennemis.get(j))) {
-					this.tourelles.get(i).attaquer(this.ennemis.get(j));
-				}
-			}
+		for(int j = 0; j < getNbTourelles(); j++) {
+			this.tourelles.get(j).agir();
 		}
 		this.nbTours += 1;
 	}
@@ -111,7 +102,14 @@ public class Environnement {
 	public void ajouterEnnemi(Ennemi e) {
 		this.ennemis.add(e);
 	}
-	public void PosAléatoire(Acteur a) {
+	public void delEnnemi(String id) {
+		for(int i = getNbEnnemis()-1 ; i >= 0; i--) {
+			if(getEnnemis().get(i).getId() == id) {
+				this.ennemis.remove(i);
+			}
+		}
+	}
+	public void PosAlÃ©atoire(Acteur a) {
 		if(a instanceof Ennemi) {
 			do {
 				a.nouvellePosition();
@@ -125,7 +123,7 @@ public class Environnement {
 	}
 
 	public boolean positionValableEnnemi(int x, int y) {
-		// cette méthode permet de savoir si un ennemi est autorisé a accéder à  cette position.
+		// cette mÃ©thode permet de savoir si un ennemi est autorisÃ© a accÃ©der Ã   cette position.
 		if(this.terrain2D[x][y] != 'c') {
 			return false;
 		}
