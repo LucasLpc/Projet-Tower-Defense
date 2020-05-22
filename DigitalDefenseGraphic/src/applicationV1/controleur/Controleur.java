@@ -77,7 +77,7 @@ public class Controleur implements Initializable{
     void creerSprite(Acteur a) {
         ImageView r;
         if(a instanceof Ennemi) {
-            r = new ImageView("ressources/lion.png");
+            r = new ImageView("ressources/coyote.png");
         }
         else {
             r = new ImageView("ressources/tourelle_1.png");
