@@ -18,14 +18,13 @@ public class Ennemi extends Acteur{
 	
 	public Ennemi(int v, int hp, Environnement env) {
 		// L'ennemi créé aura une position aléatoire, une direction aléatoire.
-		super(env);
-		nouvelleDirection();
+		super(0,0,env);
 		this.vitesse = v;
 		this.hp = hp;
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void seDéplacer() {
+	public void seDeplacer() {
 		// Cette méthode ne permet à l'ennemi de se déplacer que si la case sur laquelle il s'aprète à aller est disponible
 		int nposX;
 		int nposY;
@@ -64,7 +63,7 @@ public class Ennemi extends Acteur{
 			this.env.delEnnemi(this.getId());
 		}
 		else {
-			this.seDéplacer();
+			this.seDeplacer();
 		}
 	}
 

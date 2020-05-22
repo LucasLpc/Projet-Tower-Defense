@@ -109,7 +109,7 @@ public class Environnement {
 			}
 		}
 	}
-	public void PosAléatoire(Acteur a) {
+	public void PosAleatoire(Acteur a) {
 		if(a instanceof Ennemi) {
 			do {
 				a.nouvellePosition();
