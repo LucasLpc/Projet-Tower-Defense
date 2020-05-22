@@ -27,23 +27,72 @@ public class Environnement {
 		this.ennemis = new ArrayList<Ennemi>();
 		this.tourelles = new ArrayList<Tourelle>();
 	}
+	private LinkedList<Noeud> adjacents(Noeud noeud){
+		LinkedList<Noeud> file = new LinkedList<>();
+		
+//		if(noeud.getX()-1<0 || noeud.getY()-1<0 || noeud.getX()+1>this.terrain2D.length || noeud.getY()+1>this.terrain2D[0].length)
+//			throw new Error("Sortie de tableau");
+//		else {
+//			if(this.terrain2D[noeud.getX()-1][noeud.getY()] == 'c') {
+//				file.add(new Noeud(noeud.getX()-1,noeud.getY(),'c'));
+//			}
+//			if(this.terrain2D[noeud.getX()][noeud.getY()-1] == 'c') {
+//				file.add(new Noeud(noeud.getX(),noeud.getY()-1,'c'));
+//			}
+//			if(this.terrain2D[noeud.getX()+1][noeud.getY()] == 'c') {
+//				file.add(new Noeud(noeud.getX()+1,noeud.getY(),'c'));
+//			}
+//			if(this.terrain2D[noeud.getX()][noeud.getY()+1] == 'c') {
+//				file.add(new Noeud(noeud.getX(),noeud.getY()+1,'c'));
+//			}
+//		}
+		if(this.terrain2D.length > noeud.getX()+1) {
+			if(this.terrain2D[noeud.getX()+1][noeud.getY()] == 'c') 
+				file.add(new Noeud(noeud.getX()+1,noeud.getY(),'c'));
+			else System.out.println("la case X+1 n'est pas pratiquable");
+		}else System.out.println("la case X+1 n'est pas valable");
+
+		if(0 <= noeud.getX()-1) {
+			if(this.terrain2D[noeud.getX()-1][noeud.getY()] == 'c') 
+				file.add(new Noeud(noeud.getX()-1,noeud.getY(),'c'));
+			else System.out.println("la case X-1 n'est pas pratiquable");
+		}else System.out.println("la case X-1 n'est pas valable");
+
+		if(this.terrain2D[0].length > noeud.getY()+1) {
+			if(this.terrain2D[noeud.getX()][noeud.getY()+1] == 'c') 
+				file.add(new Noeud(noeud.getX(),noeud.getY()+1,'c'));
+			else System.out.println("la case Y+1 n'est pas pratiquable");
+		}else System.out.println("la case Y+1 n'est pas valable");
+
+		if(0 <= noeud.getY()-1) {
+			if (this.terrain2D[noeud.getX()][noeud.getY()-1] == 'c') 
+				file.add(new Noeud(noeud.getX(),noeud.getY()-1,'c'));
+			else System.out.println("la case Y-1 n'est pas pratiquable");
+		}else System.out.println("la case Y-1 n'est pas valable");
+
+
+		return file;
+	}
 	public ArrayList<Noeud> BFS(int x,int y){
-		Noeud[][] terrain = null;
+		Noeud[][] terrain = new Noeud[this.terrain2D.length][this.terrain2D[0].length];
 		ArrayList<Noeud> chemin = new ArrayList<Noeud>();
 		
 		for(int i=0; i<this.terrain2D.length; i++) 
-			for(int j=0;j<this.terrain2D[j].length; j++) 
+			for(int j=0;j<this.terrain2D[i].length; j++) 
 				if(terrain2D[i][j] == 'c') terrain[i][j] = new Noeud(i,j,'c');
 				else terrain[i][j] = new Noeud(i,j,'v');
 			
 		Queue<Noeud> file = new LinkedList<Noeud>();
-		file.add(terrain[x][y]);
+		file.add(terrain[y][x]);
 		while(!file.isEmpty()) {
 			Noeud noeud = file.remove();
+			System.out.println(noeud);
 			chemin.add(noeud);
+			noeud.adjacent = adjacents(noeud);
 			for(Noeud adjNoeud : noeud.adjacent) {
+				adjNoeud.incrDistance();
 				if(adjNoeud.getDistance() != 0) {
-					adjNoeud.incrDistance();
+					System.out.println(adjNoeud);
 					file.add(adjNoeud);
 				}
 			}
@@ -51,27 +100,7 @@ public class Environnement {
 		return chemin;
 		
 	}
-	private LinkedList<Noeud> adjacents(Noeud noeud){
-		LinkedList<Noeud> file = new LinkedList<>();
-		
-		if(noeud.getX()-1<0 || noeud.getY()-1<0 || noeud.getX()+1>this.terrain2D.length || noeud.getY()+1>this.terrain2D[0].length)
-			return null;
-		else {
-			if(this.terrain2D[noeud.getX()-1][noeud.getY()] == 'c') {
-				file.add(new Noeud(noeud.getX()-1,noeud.getY(),'c'));
-			}
-			if(this.terrain2D[noeud.getX()][noeud.getY()-1] == 'c') {
-				file.add(new Noeud(noeud.getX(),noeud.getY()-1,'c'));
-			}
-			if(this.terrain2D[noeud.getX()+1][noeud.getY()] == 'c') {
-				file.add(new Noeud(noeud.getX()+1,noeud.getY(),'c'));
-			}
-			if(this.terrain2D[noeud.getX()][noeud.getY()+1] == 'c') {
-				file.add(new Noeud(noeud.getX(),noeud.getY()+1,'c'));
-			}
-		}
-		return file;
-	}
+	
 	private char[][] tab2D(char[] n, int ligne, int colonne) {
 		char[][] tab = new char[ligne][colonne];
 		int indice =0;
@@ -123,7 +152,7 @@ public class Environnement {
 	}
 
 	public boolean positionValableEnnemi(int x, int y) {
-		// cette méthode permet de savoir si un ennemi est autorisé a accéder à  cette position.
+		// cette methode permet de savoir si un ennemi est autorise a acceder à  cette position.
 		if(this.terrain2D[x][y] != 'c') {
 			return false;
 		}

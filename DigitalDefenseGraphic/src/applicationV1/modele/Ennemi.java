@@ -8,24 +8,20 @@ public class Ennemi extends Acteur{
 	private int hp;
 
 	public Ennemi(int x, int y, int v, int d, int hp, Environnement env) {
-		// L'ennemi créé aura une position donnée, une direction donnée.
 		super(x, y, env);
 		this.vitesse = v;
 		this.direction = d;
 		this.hp = hp;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Ennemi(int v, int hp, Environnement env) {
-		// L'ennemi créé aura une position aléatoire, une direction aléatoire.
 		super(0,0,env);
+		nouvelleDirection();
 		this.vitesse = v;
 		this.hp = hp;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void seDeplacer() {
-		// Cette méthode ne permet à l'ennemi de se déplacer que si la case sur laquelle il s'aprète à aller est disponible
 		int nposX;
 		int nposY;
 		do {
@@ -70,7 +66,7 @@ public class Ennemi extends Acteur{
 	public void nouvelleDirection() {
 		// 4 directions sont possibles 0 haut, 1 droite, 2 bas, 3 gauche.
 		Random random = new Random();
-		this.direction = random.nextInt(4); // attention cela génère un entier compris entre 0 et 3, le 4 est exclu.
+		this.direction = random.nextInt(4); // attention cela genère un entier compris entre 0 et 3, le 4 est exclu.
 	}
 	
 	public void perdreHp(int degats) {

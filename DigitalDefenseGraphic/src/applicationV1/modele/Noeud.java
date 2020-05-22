@@ -39,5 +39,8 @@ public class Noeud {
 	public void incrDistance() {
 		this.distance++;
 	}
+	public String toString() {
+		return this.x + "," + this.y + "," + this.distance;
+	}
 	
 }
