@@ -3,6 +3,8 @@ package applicationV1.controleur;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,11 +18,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.util.Duration;
 import applicationV1.modele.*;
 
 public class Controleur implements Initializable{
 	
 	private Environnement env;
+	private Timeline gameloop;
 
     @FXML
     private ResourceBundle resources;
@@ -65,7 +69,6 @@ public class Controleur implements Initializable{
     }
     @FXML
     void runModel(ActionEvent event) {
-    	System.out.println(this.env.BFS(9,9));
     	this.env.unTour();
     }    
     void initTiles(){
@@ -116,6 +119,17 @@ public class Controleur implements Initializable{
 		System.out.println("initialisation");
 		this.env = new Environnement();
 		initTiles();
+		initCoyote();
+		gameloop.play();
+		
+	}
+	public void initCoyote() {
+		gameloop = new Timeline();
+		gameloop.setCycleCount(Timeline.INDEFINITE);
+		KeyFrame kf = new KeyFrame(Duration.seconds(0.05),(event->{
+			this.env.unTour();
+		}));
+		gameloop.getKeyFrames().add(kf);
 	}
 
 }

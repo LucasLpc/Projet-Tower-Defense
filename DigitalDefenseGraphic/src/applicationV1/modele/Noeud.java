@@ -8,7 +8,6 @@ import java.lang.Math.*;
 public class Noeud {
 	private int distance;
 	private int x,y;
-	private char value;
 	private Environnement env;
 	LinkedList<Noeud> adjacent = new LinkedList<>();
 	public Noeud(int x, int y, int distance) {
@@ -79,12 +78,6 @@ public class Noeud {
 	}
 	public void setY(int y) {
 		this.y = y;
-	}
-	public char getValue() {
-		return value;
-	}
-	public void setValue(char value) {
-		this.value = value;
 	}
 	public int getDistance() {
 		return this.distance;
