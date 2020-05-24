@@ -65,7 +65,8 @@ public class Controleur implements Initializable{
     }
     @FXML
     void runModel(ActionEvent event) {
-    	System.out.println(this.env.BFS(9,9).size());
+    	System.out.println(this.env.BFS(9,9));
+    	this.env.unTour();
     }    
     void initTiles(){
     	for(int i = 0; i < this.env.getTerrain().length; i++) {

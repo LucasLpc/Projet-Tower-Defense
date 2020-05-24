@@ -1,22 +1,22 @@
 package applicationV1.modele;
 
 public class Tourelle extends Acteur{
-	private int dégats;
-	private int portée;
+	private int degats;
+	private int portee;
 
 	public Tourelle(int x, int y, int deg, int port, Environnement env) {
-		// Création d'une tourelle sur une position donnée.
+		// Creation d'une tourelle sur une position donnee.
 		super(x, y, env);
-		this.dégats = deg;
-		this.portée = port;
+		this.degats = deg;
+		this.portee = port;
 		// TODO Auto-generated constructor stub
 	}
 	
 	public Tourelle(int deg, int port, Environnement env) {
-		// Création d'une tourelle avec un position aléatoire
+		// Creation d'une tourelle avec un position aleatoire
 		super(env);
-		this.dégats = deg;
-		this.portée = port;
+		this.degats = deg;
+		this.portee = port;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -24,7 +24,7 @@ public class Tourelle extends Acteur{
 		int j = 0;
 		do {
 			if(this.env.getNbEnnemis() > 0) {
-				if (this.aPortée(this.env.getEnnemis().get(j))) {
+				if (this.aPortee(this.env.getEnnemis().get(j))) {
 					this.attaquer(this.env.getEnnemis().get(j));
 					j = this.env.getNbEnnemis();
 				}
@@ -33,9 +33,9 @@ public class Tourelle extends Acteur{
 		}while(j < this.env.getNbEnnemis());
 	}
 	
-	public boolean aPortée(Ennemi e) {
-		// La méthode sert à savoir si une tourelle a un ennemi donné à portée
-		if(e.getX() < getX() + this.portée && e.getY() < getY() + this.portée && e.getX() > getX() - this.portée && e.getY() > getY() - portée) {
+	public boolean aPortee(Ennemi e) {
+		// La methode sert à savoir si une tourelle a un ennemi donne à portee
+		if(e.getX() < getX() + this.portee && e.getY() < getY() + this.portee && e.getX() > getX() - this.portee && e.getY() > getY() - portee) {
 			return true;
 		}
 		else {
@@ -44,14 +44,14 @@ public class Tourelle extends Acteur{
 	}
 	
 	public void attaquer(Ennemi e) {
-		e.perdreHp(this.dégats);
+		e.perdreHp(this.degats);
 		System.out.println();
-		System.out.println(e + " a perdu " + this.dégats + " HP");
+		System.out.println(e + " a perdu " + this.degats + " HP");
 	}
 
 	@Override
 	public String toString() {
-		return "Tourelle [dégats=" + dégats + ", portée=" + portée + " " + super.toString() + "]";
+		return "Tourelle [degats=" + degats + ", portee=" + portee + " " + super.toString() + "]";
 	}
 
 }

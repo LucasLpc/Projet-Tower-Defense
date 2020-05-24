@@ -1,5 +1,6 @@
 package applicationV1.modele;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Ennemi extends Acteur{
@@ -22,36 +23,19 @@ public class Ennemi extends Acteur{
 	}
 	
 	public void seDeplacer() {
-		int nposX;
-		int nposY;
-		do {
-			switch(direction) {
-			case 0:
-				nposX = this.getX();
-				nposY = this.getY()+1;
-			break;
-			case 1:
-				nposX = this.getX()+1;
-				nposY = this.getY();
-			break;
-			case 2:
-				nposX = this.getX();
-				nposY = this.getY()-1;
-			break;
-			case 3:
-				nposX = this.getX()-1;
-				nposY = this.getY();
-			break;
-			default:
-				nposX = -1;
-				nposY = -1;
+		ArrayList<Noeud> liste = this.env.BFS(9, 9);
+		int distance;
+		for(int i=0;i<liste.size();i++) {
+			if(liste.get(i).getX() == this.getX() && liste.get(i).getY() == this.getY()) { 
+				distance = liste.get(i).getDistance()-1;
+				for(int j=0;j<liste.size();j++) {
+					if(liste.get(j).getDistance() == distance) {
+						this.setX(liste.get(j).getX());
+						this.setY(liste.get(j).getY());
+					}
+				}
 			}
-			if(!this.env.positionValableEnnemi(nposX, nposY)) {
-				nouvelleDirection();
-			}
-		}while(!this.env.positionValableEnnemi(nposX, nposY));
-		setX(nposX);
-		setY(nposY);
+		}				
 	}
 	
 	public void agir() {
