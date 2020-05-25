@@ -1,5 +1,8 @@
 package applicationV1.modele;
 
+import applicationV1.modele.EnnemiType.Ennemi;
+import applicationV1.modele.TourelleType.Tourelle;
+
 public class Essai {
 
 	public static void main(String[] args) {

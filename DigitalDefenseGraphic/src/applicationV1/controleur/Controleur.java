@@ -20,8 +20,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import applicationV1.modele.*;
+import applicationV1.modele.EnnemiType.*;
+import applicationV1.modele.TourelleType.Tourelle;
 
 public class Controleur implements Initializable{
 
@@ -40,13 +43,13 @@ public class Controleur implements Initializable{
 		String nomBouton = bouttonChoisi.getText();
 		Ennemi ennemi = null;
 		if(nomBouton.equals("Coyote"))
-			this.env.ajouterEnnemi(ennemi = new Ennemi(10,10,env));
+			this.env.ajouterEnnemi(ennemi = new EnnemiCoyote(env));
 		if(nomBouton.equals("Hyena"))
-			this.env.ajouterEnnemi(ennemi = new Ennemi(10,10,env));
+			this.env.ajouterEnnemi(ennemi = new EnnemiHyena(env));
 		if(nomBouton.equals("Bear"))
-			this.env.ajouterEnnemi(ennemi = new Ennemi(10,10,env));
+			this.env.ajouterEnnemi(ennemi = new EnnemiBear(env));
 		if(nomBouton.equals("Lion"))
-			this.env.ajouterEnnemi(ennemi = new Ennemi(10,10,env));
+			this.env.ajouterEnnemi(ennemi = new EnnemiLion(env));
 		creerSprite(ennemi);
 	} 
 	void initTiles(){
@@ -57,9 +60,16 @@ public class Controleur implements Initializable{
 		}
 	}    
 	void creerSprite(Acteur a) {
-		ImageView r;
+		ImageView r = null;
 		if(a instanceof Ennemi) {
-			r = new ImageView("ressources/coyote.png");
+			if(a instanceof EnnemiCoyote) 
+				r = new ImageView("ressources/coyote.png");
+			if(a instanceof EnnemiHyena)
+				r = new ImageView("ressources/hyena.png");
+			if(a instanceof EnnemiBear)
+				r = new ImageView("ressources/bear.png");
+			if(a instanceof EnnemiLion)
+				r = new ImageView("ressources/lion.png");
 		}
 		else {
 			r = new ImageView("ressources/tourelle_1.png");
@@ -97,11 +107,11 @@ public class Controleur implements Initializable{
 		System.out.println("initialisation");
 		this.env = new Environnement();
 		initTiles();
-		initCoyote();
+		initTour();
 		gameloop.play();
 
 	}
-	public void initCoyote() {
+	public void initTour() {
 		gameloop = new Timeline();
 		gameloop.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(Duration.seconds(0.05),(event->{

@@ -1,5 +1,7 @@
 package applicationV1.modele;
 
+import applicationV1.modele.EnnemiType.Ennemi;
+
 public class GameLoop {
 	private Environnement env;
 	private boolean partieEnCours;

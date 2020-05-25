@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
 
+import applicationV1.modele.EnnemiType.Ennemi;
+import applicationV1.modele.TourelleType.Tourelle;
+
 public class Environnement {
 
 	private ArrayList<Ennemi> ennemis;

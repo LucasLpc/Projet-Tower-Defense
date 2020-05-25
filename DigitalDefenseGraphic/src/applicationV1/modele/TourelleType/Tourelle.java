@@ -1,4 +1,8 @@
-package applicationV1.modele;
+package applicationV1.modele.TourelleType;
+
+import applicationV1.modele.Acteur;
+import applicationV1.modele.Environnement;
+import applicationV1.modele.EnnemiType.Ennemi;
 
 public class Tourelle extends Acteur{
 	private int degats;
