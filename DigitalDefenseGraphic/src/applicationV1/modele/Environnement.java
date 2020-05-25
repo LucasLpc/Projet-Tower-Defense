@@ -6,13 +6,13 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
 
-import applicationV1.modele.EnnemiType.Ennemi;
-import applicationV1.modele.TourelleType.Tourelle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Environnement {
 
-	private ArrayList<Ennemi> ennemis;
-	private ArrayList<Tourelle> tourelles;
+	private ObservableList<Ennemi> ennemis;
+	private ObservableList<Tourelle> tourelles;
 	private int nbTours;
 	private char terrain[] = {'c','v','v','v','v','v','v','v','v','v',
 							'c','v','v','v','v','v','v','v','v','v',
@@ -27,8 +27,8 @@ public class Environnement {
 	private char terrain2D[][] = tab2D(terrain,10,10);
 	
 	public Environnement() {
-		this.ennemis = new ArrayList<Ennemi>();
-		this.tourelles = new ArrayList<Tourelle>();
+		this.ennemis = FXCollections.observableArrayList();
+		this.tourelles = FXCollections.observableArrayList();
 	}
 	public char[][] getTerrain2D() {
 		return terrain2D;
@@ -160,11 +160,11 @@ public class Environnement {
 		return this.tourelles.size();
 	}
 	
-	public ArrayList<Ennemi> getEnnemis() {
+	public ObservableList<Ennemi> getEnnemis() {
 		return this.ennemis;
 	}
 	
-	public ArrayList<Tourelle> getTourelles(){
+	public ObservableList<Tourelle> getTourelles(){
 		return this.tourelles;
 	}
 	

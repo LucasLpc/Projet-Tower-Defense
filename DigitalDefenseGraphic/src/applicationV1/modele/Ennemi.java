@@ -1,11 +1,7 @@
-package applicationV1.modele.EnnemiType;
+package applicationV1.modele;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import applicationV1.modele.Acteur;
-import applicationV1.modele.Environnement;
-import applicationV1.modele.Noeud;
 
 public class Ennemi extends Acteur{
 	private int vitesse;
@@ -49,6 +45,10 @@ public class Ennemi extends Acteur{
 		else {
 			this.seDeplacer();
 		}
+	}
+	
+	public String getId() {
+		return this.id;
 	}
 
 	public void nouvelleDirection() {

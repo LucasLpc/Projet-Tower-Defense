@@ -12,7 +12,7 @@ public abstract class Acteur {
 	private IntegerProperty y64;
 	protected Environnement env;
 	public static int compteur=0;
-	private String id;
+	protected String id;
 
 	public Acteur(int x, int y, Environnement env) {
 		this.x = new SimpleIntegerProperty(x);
@@ -48,6 +48,7 @@ public abstract class Acteur {
 	}
 	
 	public abstract void agir();
+	public abstract String getId();
 	
 	public final int getX() {
 		return this.x.getValue();
@@ -65,10 +66,6 @@ public abstract class Acteur {
 	public final void setY(int y) {
 		this.y.setValue(y);
 		this.y64.setValue(y*64);
-	}
-	
-	public String getId() {
-		return this.id;
 	}
 	
 	public final IntegerProperty getXProperty() {

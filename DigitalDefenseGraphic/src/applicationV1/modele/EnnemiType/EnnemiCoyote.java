@@ -1,5 +1,6 @@
 package applicationV1.modele.EnnemiType;
 
+import applicationV1.modele.Ennemi;
 import applicationV1.modele.Environnement;
 
 public class EnnemiCoyote extends Ennemi{

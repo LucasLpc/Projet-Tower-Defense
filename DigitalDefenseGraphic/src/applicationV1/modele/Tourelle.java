@@ -1,8 +1,4 @@
-package applicationV1.modele.TourelleType;
-
-import applicationV1.modele.Acteur;
-import applicationV1.modele.Environnement;
-import applicationV1.modele.EnnemiType.Ennemi;
+package applicationV1.modele;
 
 public class Tourelle extends Acteur{
 	private int degats;
@@ -35,6 +31,10 @@ public class Tourelle extends Acteur{
 			}
 			j++;
 		}while(j < this.env.getNbEnnemis());
+	}
+	
+	public String getId() {
+		return this.id;
 	}
 	
 	public boolean aPortee(Ennemi e) {

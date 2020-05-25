@@ -24,7 +24,6 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import applicationV1.modele.*;
 import applicationV1.modele.EnnemiType.*;
-import applicationV1.modele.TourelleType.Tourelle;
 
 public class Controleur implements Initializable{
 
@@ -50,7 +49,6 @@ public class Controleur implements Initializable{
 			this.env.ajouterEnnemi(ennemi = new EnnemiBear(env));
 		if(nomBouton.equals("Lion"))
 			this.env.ajouterEnnemi(ennemi = new EnnemiLion(env));
-		creerSprite(ennemi);
 	} 
 	void initTiles(){
 		for(int i = 0; i < this.env.getTerrain().length; i++) {
@@ -94,7 +92,6 @@ public class Controleur implements Initializable{
 				Tourelle t = new Tourelle((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,1,100,this.env);
 				System.out.println(tile.getLayoutX());
 				this.env.ajouterTourelle(t);
-				creerSprite(t);
 			});
 			return tile;
 		default:
@@ -109,7 +106,8 @@ public class Controleur implements Initializable{
 		initTiles();
 		initTour();
 		gameloop.play();
-
+		this.env.getEnnemis().addListener(new ObservateurEnnemis(this.spritePane));
+		this.env.getTourelles().addListener(new ObservateurTourelles(this.spritePane));
 	}
 	public void initTour() {
 		gameloop = new Timeline();
