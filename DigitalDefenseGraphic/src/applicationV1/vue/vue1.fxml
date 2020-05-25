@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -17,21 +18,26 @@
    <right>
       <VBox prefHeight="235.0" prefWidth="182.0" styleClass="encadre" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="235.0" prefWidth="168.0">
                <children>
-                  <CheckBox fx:id="checkBox_nbEnnemiAAjouter" mnemonicParsing="false" text="Ennemi" textFill="WHITE" />
-                  <CheckBox fx:id="checkBox_nbTourelleAAjouter" mnemonicParsing="false" text="Tourelle" textFill="WHITE" />
-                  <HBox prefHeight="14.0" prefWidth="115.0" />
-                  <Label text="Nombre" textFill="WHITE" />
-                  <TextField fx:id="txt_nbActeurAAjouter" prefHeight="14.0" prefWidth="84.0" />
+                  <HBox prefHeight="14.0" prefWidth="115.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Coyote">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="EnnemiToggle" />
+                           </toggleGroup>
+                        </RadioButton>
+                     </children></HBox>
+                  <RadioButton mnemonicParsing="false" text="Hyena" toggleGroup="$EnnemiToggle" />
+                  <RadioButton mnemonicParsing="false" text="Bear" toggleGroup="$EnnemiToggle" />
+                  <RadioButton mnemonicParsing="false" text="Lion" toggleGroup="$EnnemiToggle" />
                   <Button mnemonicParsing="false" onAction="#ajouterActeur" text="Ajouter" />
+                  <Button mnemonicParsing="false" text="Incr. la manche" />
+                  <Button mnemonicParsing="false" text="Finir la manche (killall)" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#runModel" text="Run" />
-               </children>
-            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
          </children></VBox>
    </right>
    <center>
@@ -41,31 +47,4 @@
          </children>
       </Pane>
    </center>
-   <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Ajout Ennemi" />
-                  <TextField />
-                  <Button mnemonicParsing="false" text="Button" />
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Ajout Tourelle" />
-                  <TextField />
-                  <Button mnemonicParsing="false" text="Button" />
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Incr Manche" />
-                  <Button mnemonicParsing="false" text="Button" />
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
-         </children>
-      </HBox>
-   </bottom>
 </BorderPane>

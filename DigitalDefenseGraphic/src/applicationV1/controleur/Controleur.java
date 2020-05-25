@@ -10,7 +10,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -22,75 +24,51 @@ import javafx.util.Duration;
 import applicationV1.modele.*;
 
 public class Controleur implements Initializable{
-	
+
 	private Environnement env;
 	private Timeline gameloop;
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private TilePane tileMap;
-    
-    @FXML
-    private Pane spritePane;
-    
-    @FXML
-    private CheckBox checkBox_nbEnnemiAAjouter;
-
-    @FXML
-    private CheckBox checkBox_nbTourelleAAjouter;
-
-    @FXML
-    private TextField txt_nbActeurAAjouter;
-      
-    @FXML
-    void ajouterActeur(ActionEvent event) {
-    	if(checkBox_nbEnnemiAAjouter.isSelected()) {
-    		for(int i=0;i<Integer.parseInt(txt_nbActeurAAjouter.getText());i++) {
-    			Ennemi e = new Ennemi(10, 10, this.env);
-    			this.env.ajouterEnnemi(e);
-    			creerSprite(e);
-    			System.out.println(this.env.getCase(0, 1));
-    			System.out.println(this.env.getCase(0, 0));
-    			System.out.println(this.env.getCase(1, 1));
-    		}
-    	}   	
-    	if(checkBox_nbTourelleAAjouter.isSelected()) {
-    		for(int i=0;i<Integer.parseInt(txt_nbActeurAAjouter.getText());i++) {
-    			Tourelle t = new Tourelle(1,100,this.env);
-    			this.env.ajouterTourelle(t);
-    			creerSprite(t);
-    		}
-    	}
-    }
-    @FXML
-    void runModel(ActionEvent event) {
-    	this.env.unTour();
-    }    
-    void initTiles(){
-    	for(int i = 0; i < this.env.getTerrain().length; i++) {
-    		for(int j = 0; j < this.env.getTerrain()[0].length; j++) {
-    			this.tileMap.getChildren().add(obtenirImage(this.env.getTerrain()[i][j]));
-    		}
-    	}
-    }    
-    void creerSprite(Acteur a) {
-        ImageView r;
-        if(a instanceof Ennemi) {
-            r = new ImageView("ressources/coyote.png");
-        }
-        else {
-            r = new ImageView("ressources/tourelle_1.png");
-        }
-        r.setOnMouseClicked((e) -> System.out.println(a));
-        r.translateXProperty().bind(a.getX64Property());
-        r.translateYProperty().bind(a.getY64Property());
-        this.spritePane.getChildren().add(r);
-    }  
+	@FXML
+	private Pane spritePane;
+	@FXML
+	private ToggleGroup EnnemiToggle;
+	@FXML
+	private TilePane tileMap;
+	@FXML
+	void ajouterActeur(ActionEvent event) {
+		RadioButton bouttonChoisi = (RadioButton)EnnemiToggle.getSelectedToggle();
+		String nomBouton = bouttonChoisi.getText();
+		Ennemi ennemi = null;
+		if(nomBouton.equals("Coyote"))
+			this.env.ajouterEnnemi(ennemi = new Ennemi(10,10,env));
+		if(nomBouton.equals("Hyena"))
+			this.env.ajouterEnnemi(ennemi = new Ennemi(10,10,env));
+		if(nomBouton.equals("Bear"))
+			this.env.ajouterEnnemi(ennemi = new Ennemi(10,10,env));
+		if(nomBouton.equals("Lion"))
+			this.env.ajouterEnnemi(ennemi = new Ennemi(10,10,env));
+		creerSprite(ennemi);
+	} 
+	void initTiles(){
+		for(int i = 0; i < this.env.getTerrain().length; i++) {
+			for(int j = 0; j < this.env.getTerrain()[0].length; j++) {
+				this.tileMap.getChildren().add(obtenirImage(this.env.getTerrain()[i][j]));
+			}
+		}
+	}    
+	void creerSprite(Acteur a) {
+		ImageView r;
+		if(a instanceof Ennemi) {
+			r = new ImageView("ressources/coyote.png");
+		}
+		else {
+			r = new ImageView("ressources/tourelle_1.png");
+		}
+		r.setOnMouseClicked((e) -> System.out.println(a));
+		r.translateXProperty().bind(a.getX64Property());
+		r.translateYProperty().bind(a.getY64Property());
+		this.spritePane.getChildren().add(r);
+	}  
 	public ImageView obtenirImage(int n) {
 		ImageView tile;
 		switch (n) {
@@ -121,7 +99,7 @@ public class Controleur implements Initializable{
 		initTiles();
 		initCoyote();
 		gameloop.play();
-		
+
 	}
 	public void initCoyote() {
 		gameloop = new Timeline();

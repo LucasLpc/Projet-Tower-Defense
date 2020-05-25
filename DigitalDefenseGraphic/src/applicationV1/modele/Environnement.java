@@ -27,26 +27,30 @@ public class Environnement {
 		this.ennemis = new ArrayList<Ennemi>();
 		this.tourelles = new ArrayList<Tourelle>();
 	}
+	public char[][] getTerrain2D() {
+		return terrain2D;
+	}
+	public ArrayList<Noeud> BFS(int x,int y){			
+		ArrayList<Noeud> file = new ArrayList<Noeud>();
+		Noeud noeud = new Noeud(x,y,0);
+		file.add(noeud);
+		while(!(noeud.getX() == 0 && noeud.getY() == 0)) {
+			noeud = file.get(file.size()-1);
+			noeud.adjacent = adjacents(noeud);
+			for(Noeud adjNoeud : noeud.adjacent) {
+				if(!adjNoeud.estDansListe(file)) {
+					System.out.println(adjNoeud);					
+					file.add(adjNoeud);
+				}
+			}
+		}
+		return file;
+		
+	}
 	private LinkedList<Noeud> adjacents(Noeud noeud){
+
 		LinkedList<Noeud> file = new LinkedList<>();
 		int distance = noeud.getDistance()+1;
-		
-//		if(noeud.getX()-1<0 || noeud.getY()-1<0 || noeud.getX()+1>this.terrain2D.length || noeud.getY()+1>this.terrain2D[0].length)
-//			throw new Error("Sortie de tableau");
-//		else {
-//			if(this.terrain2D[noeud.getX()-1][noeud.getY()] == 'c') {
-//				file.add(new Noeud(noeud.getX()-1,noeud.getY(),'c'));
-//			}
-//			if(this.terrain2D[noeud.getX()][noeud.getY()-1] == 'c') {
-//				file.add(new Noeud(noeud.getX(),noeud.getY()-1,'c'));
-//			}
-//			if(this.terrain2D[noeud.getX()+1][noeud.getY()] == 'c') {
-//				file.add(new Noeud(noeud.getX()+1,noeud.getY(),'c'));
-//			}
-//			if(this.terrain2D[noeud.getX()][noeud.getY()+1] == 'c') {
-//				file.add(new Noeud(noeud.getX(),noeud.getY()+1,'c'));
-//			}
-//		}
 		if(this.terrain2D.length > noeud.getX()+1) {
             if(this.terrain2D[noeud.getY()][noeud.getX()+1] == 'c') 
                 file.add(new Noeud(noeud.getX()+1,noeud.getY(),distance));
@@ -74,23 +78,7 @@ public class Environnement {
 
 		return file;
 	}
-	public ArrayList<Noeud> BFS(int x,int y){			
-		ArrayList<Noeud> file = new ArrayList<Noeud>();
-		Noeud noeud = new Noeud(x,y,0);
-		file.add(noeud);
-		while(!(noeud.getX() == 0 && noeud.getY() == 0)) {
-			noeud = file.get(file.size()-1);
-			noeud.adjacent = adjacents(noeud);
-			for(Noeud adjNoeud : noeud.adjacent) {
-				if(!adjNoeud.estDansListe(file)) {
-					System.out.println(adjNoeud);					
-					file.add(adjNoeud);
-				}
-			}
-		}
-		return file;
-		
-	}
+	
 	private char[][] tab2D(char[] n, int ligne, int colonne) {
 		char[][] tab = new char[ligne][colonne];
 		int indice =0;
