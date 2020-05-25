@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
 
+import applicationV1.modele.EnnemiType.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

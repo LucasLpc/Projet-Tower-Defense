@@ -24,6 +24,7 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import applicationV1.modele.*;
 import applicationV1.modele.EnnemiType.*;
+import applicationV1.modele.TourelleType.TourelleMinigun;
 
 public class Controleur implements Initializable{
 
@@ -56,27 +57,7 @@ public class Controleur implements Initializable{
 				this.tileMap.getChildren().add(obtenirImage(this.env.getTerrain()[i][j]));
 			}
 		}
-	}    
-	void creerSprite(Acteur a) {
-		ImageView r = null;
-		if(a instanceof Ennemi) {
-			if(a instanceof EnnemiCoyote) 
-				r = new ImageView("ressources/coyote.png");
-			if(a instanceof EnnemiHyena)
-				r = new ImageView("ressources/hyena.png");
-			if(a instanceof EnnemiBear)
-				r = new ImageView("ressources/bear.png");
-			if(a instanceof EnnemiLion)
-				r = new ImageView("ressources/lion.png");
-		}
-		else {
-			r = new ImageView("ressources/tourelle_1.png");
-		}
-		r.setOnMouseClicked((e) -> System.out.println(a));
-		r.translateXProperty().bind(a.getX64Property());
-		r.translateYProperty().bind(a.getY64Property());
-		this.spritePane.getChildren().add(r);
-	}  
+	}      
 	public ImageView obtenirImage(int n) {
 		ImageView tile;
 		switch (n) {
@@ -89,7 +70,7 @@ public class Controleur implements Initializable{
 		case 't':
 			tile = new ImageView("ressources/tilePlacementTest.png");
 			tile.setOnMouseClicked((e) -> {
-				Tourelle t = new Tourelle((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,1,100,this.env);
+				Tourelle t = new TourelleMinigun((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,this.env);
 				System.out.println(tile.getLayoutX());
 				this.env.ajouterTourelle(t);
 			});
@@ -112,7 +93,7 @@ public class Controleur implements Initializable{
 	public void initTour() {
 		gameloop = new Timeline();
 		gameloop.setCycleCount(Timeline.INDEFINITE);
-		KeyFrame kf = new KeyFrame(Duration.seconds(0.05),(event->{
+		KeyFrame kf = new KeyFrame(Duration.seconds(0.016),(event->{
 			this.env.unTour();
 		}));
 		gameloop.getKeyFrames().add(kf);

@@ -2,6 +2,11 @@ package applicationV1.controleur;
 
 import applicationV1.modele.Acteur;
 import applicationV1.modele.Tourelle;
+import applicationV1.modele.EnnemiType.EnnemiBear;
+import applicationV1.modele.EnnemiType.EnnemiCoyote;
+import applicationV1.modele.EnnemiType.EnnemiHyena;
+import applicationV1.modele.EnnemiType.EnnemiLion;
+import applicationV1.modele.TourelleType.*;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -17,12 +22,23 @@ public class ObservateurTourelles implements ListChangeListener<Tourelle>{
 		this.spritePane = spritePane;
 	}
 	
-	public void creerSprite(Tourelle nouveau) {
-		ImageView r = new ImageView("ressources/tourelle_1.png");
-		r.setOnMouseClicked((e) -> System.out.println(nouveau));
-		r.translateXProperty().bind(nouveau.getX64Property());
-		r.translateYProperty().bind(nouveau.getY64Property());
-		r.setId(nouveau.getId());
+	public void creerSprite(Tourelle t) {
+		ImageView r = null;
+		if(t instanceof TourelleBasique) 
+			r = new ImageView("ressources/coyote.png");
+		if(t instanceof TourelleMinigun)
+			r = new ImageView("ressources/tourelleMinigun.png");
+		if(t instanceof TourelleShotgun)
+			r = new ImageView("ressources/bear.png");
+		if(t instanceof TourelleSniper)
+			r = new ImageView("ressources/lion.png");
+		if(t instanceof TourelleLanceGrenade)
+			r = new ImageView("ressources/lion.png");
+		r.setOnMouseClicked((e) -> System.out.println(t));
+		//à modifier
+		r.translateXProperty().bind(t.getX64Property());
+		r.translateYProperty().bind(t.getY64Property());
+		r.setId(t.getId());
 		this.spritePane.getChildren().add(r);
 	}
 	
@@ -34,7 +50,7 @@ public class ObservateurTourelles implements ListChangeListener<Tourelle>{
 	@Override
 	public void onChanged(javafx.collections.ListChangeListener.Change<? extends Tourelle> c) {
 		while(c.next()){
-			// gestion des nouveaux n ́es
+			// gestion des nouveaux n Ì�es
 			// on cree leur sprite .
 			for(Tourelle nouveau: c.getAddedSubList()){
 				creerSprite(nouveau);

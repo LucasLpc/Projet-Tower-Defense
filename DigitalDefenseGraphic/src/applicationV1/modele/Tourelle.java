@@ -9,7 +9,6 @@ public class Tourelle extends Acteur{
 		super(x, y, env);
 		this.degats = deg;
 		this.portee = port;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Tourelle(int deg, int port, Environnement env) {
@@ -17,7 +16,6 @@ public class Tourelle extends Acteur{
 		super(env);
 		this.degats = deg;
 		this.portee = port;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void agir() {

@@ -1,0 +1,12 @@
+package applicationV1.modele.TourelleType;
+
+import applicationV1.modele.Environnement;
+import applicationV1.modele.Tourelle;
+
+public class TourelleMinigun extends Tourelle{
+
+	public TourelleMinigun(int x, int y, Environnement env) {
+		super(x, y, 5, 4, env);
+	}
+
+}
