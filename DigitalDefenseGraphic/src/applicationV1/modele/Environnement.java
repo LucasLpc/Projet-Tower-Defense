@@ -43,7 +43,7 @@ public class Environnement {
 			noeud.adjacent = adjacents(noeud);
 			for(Noeud adjNoeud : noeud.adjacent) {
 				if(!adjNoeud.estDansListe(file)) {
-					System.out.println(adjNoeud);					
+//					System.out.println(adjNoeud);					
 					file.add(adjNoeud);
 				}
 			}
@@ -58,26 +58,30 @@ public class Environnement {
 		if(this.terrain2D.length > noeud.getX()+1) {
             if(this.terrain2D[noeud.getY()][noeud.getX()+1] == 'c') 
                 file.add(new Noeud(noeud.getX()+1,noeud.getY(),distance));
-            else System.out.println("la case X+1 n'est pas pratiquable");
-        }else System.out.println("la case X+1 n'est pas valable");
+//            else System.out.println("la case X+1 n'est pas pratiquable");
+        }
+//            else System.out.println("la case X+1 n'est pas valable");
 
         if(0 <= noeud.getX()-1) {
             if(this.terrain2D[noeud.getY()][noeud.getX()-1] == 'c') 
                 file.add(new Noeud(noeud.getX()-1,noeud.getY(),distance));
-            else System.out.println("la case X-1 n'est pas pratiquable");
-        }else System.out.println("la case X-1 n'est pas valable");
+//            else System.out.println("la case X-1 n'est pas pratiquable");
+            }
+//            else System.out.println("la case X-1 n'est pas valable");
 
         if(this.terrain2D[0].length > noeud.getY()+1) {
             if(this.terrain2D[noeud.getY()+1][noeud.getX()] == 'c') 
                 file.add(new Noeud(noeud.getX(),noeud.getY()+1,distance));
-            else System.out.println("la case Y+1 n'est pas pratiquable");
-        }else System.out.println("la case Y+1 n'est pas valable");
+//            else System.out.println("la case Y+1 n'est pas pratiquable");
+      }
+//            else System.out.println("la case Y+1 n'est pas valable");
 
         if(0 <= noeud.getY()-1) {
             if (this.terrain2D[noeud.getY()-1][noeud.getX()] == 'c') 
                 file.add(new Noeud(noeud.getX(),noeud.getY()-1,distance));
-            else System.out.println("la case Y-1 n'est pas pratiquable");
-        }else System.out.println("la case Y-1 n'est pas valable");
+//            else System.out.println("la case Y-1 n'est pas pratiquable");
+        }
+//        else System.out.println("la case Y-1 n'est pas valable");
 
 
 		return file;
@@ -103,6 +107,8 @@ public class Environnement {
 		}
 		for(int j = 0; j < getNbTourelles(); j++) {
 			this.tourelles.get(j).agir();
+			this.tourelles.get(j).getAngle();
+			
 		}
 		this.nbTours += 1;
 	}

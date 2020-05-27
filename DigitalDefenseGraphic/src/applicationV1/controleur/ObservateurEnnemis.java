@@ -23,13 +23,13 @@ public class ObservateurEnnemis implements ListChangeListener<Ennemi>{
 	public void creerSprite(Ennemi e) {
 		ImageView r = null;
 		if(e instanceof EnnemiCoyote) 
-			r = new ImageView("ressources/coyote.png");
+			r = new ImageView("ressources/Ennemis/coyote.png");
 		if(e instanceof EnnemiHyena)
-			r = new ImageView("ressources/hyena.png");
+			r = new ImageView("ressources/Ennemis/hyena.png");
 		if(e instanceof EnnemiBear)
-			r = new ImageView("ressources/bear.png");
+			r = new ImageView("ressources/Ennemis/bear.png");
 		if(e instanceof EnnemiLion)
-			r = new ImageView("ressources/lion.png");
+			r = new ImageView("ressources/Ennemis/lion.png");
 		r.setOnMouseClicked((env) -> System.out.println(e));
 		r.translateXProperty().bind(e.getX64Property());
 		r.translateYProperty().bind(e.getY64Property());

@@ -50,7 +50,7 @@ public class Controleur implements Initializable{
 			this.env.ajouterEnnemi(ennemi = new EnnemiBear(env));
 		if(nomBouton.equals("Lion"))
 			this.env.ajouterEnnemi(ennemi = new EnnemiLion(env));
-	} 
+	}
 	void initTiles(){
 		for(int i = 0; i < this.env.getTerrain().length; i++) {
 			for(int j = 0; j < this.env.getTerrain()[0].length; j++) {
@@ -79,6 +79,9 @@ public class Controleur implements Initializable{
 			return null;
 		}
 	}
+	public void rotation(double distX, double distY) {
+		
+	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -93,8 +96,8 @@ public class Controleur implements Initializable{
 	public void initTour() {
 		gameloop = new Timeline();
 		gameloop.setCycleCount(Timeline.INDEFINITE);
-		KeyFrame kf = new KeyFrame(Duration.seconds(0.016),(event->{
-			this.env.unTour();
+		KeyFrame kf = new KeyFrame(Duration.seconds(0.5),(event->{
+		this.env.unTour();
 		}));
 		gameloop.getKeyFrames().add(kf);
 	}
