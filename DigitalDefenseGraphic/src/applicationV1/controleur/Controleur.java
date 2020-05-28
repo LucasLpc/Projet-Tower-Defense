@@ -1,19 +1,23 @@
 package applicationV1.controleur;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
@@ -30,13 +34,29 @@ public class Controleur implements Initializable{
 
 	private Environnement env;
 	private Timeline gameloop;
+	private ArrayList<Point2D> empTourelles = new ArrayList<Point2D>();
 
-	@FXML
-	private Pane spritePane;
-	@FXML
-	private ToggleGroup EnnemiToggle;
-	@FXML
-	private TilePane tileMap;
+    @FXML
+    private ImageView imgMinigun;
+
+    @FXML
+    private Pane spritePane;
+
+    @FXML
+    private ToggleGroup EnnemiToggle;
+
+    @FXML
+    private ImageView imgSniper;
+
+    @FXML
+    private ImageView imgShotgun;
+
+    @FXML
+    private ImageView imgLanceGrenade;
+
+    @FXML
+    private TilePane tileMap;
+
 	@FXML
 	void ajouterActeur(ActionEvent event) {
 		RadioButton bouttonChoisi = (RadioButton)EnnemiToggle.getSelectedToggle();
@@ -50,11 +70,15 @@ public class Controleur implements Initializable{
 			this.env.ajouterEnnemi(ennemi = new EnnemiBear(env));
 		if(nomBouton.equals("Lion"))
 			this.env.ajouterEnnemi(ennemi = new EnnemiLion(env));
+		System.out.println(empTourelles);
 	}
 	void initTiles(){
 		for(int i = 0; i < this.env.getTerrain().length; i++) {
 			for(int j = 0; j < this.env.getTerrain()[0].length; j++) {
 				this.tileMap.getChildren().add(obtenirImage(this.env.getTerrain()[i][j]));
+				if(obtenirImage(this.env.getTerrain()[i][j]) instanceof EmpTourelle){
+					empTourelles.add(new Point2D(j,i));
+				}
 			}
 		}
 	}      
@@ -68,10 +92,9 @@ public class Controleur implements Initializable{
 			tile = new ImageView("ressources/wood.png");
 			return tile;
 		case 't':
-			tile = new ImageView("ressources/tilePlacementTest.png");
+			tile = new EmpTourelle();
 			tile.setOnMouseClicked((e) -> {
 				Tourelle t = new TourelleMinigun((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,this.env);
-				System.out.println(tile.getLayoutX());
 				this.env.ajouterTourelle(t);
 			});
 			return tile;
@@ -79,9 +102,7 @@ public class Controleur implements Initializable{
 			return null;
 		}
 	}
-	public void rotation(double distX, double distY) {
-		
-	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -97,9 +118,8 @@ public class Controleur implements Initializable{
 		gameloop = new Timeline();
 		gameloop.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame kf = new KeyFrame(Duration.seconds(0.5),(event->{
-		this.env.unTour();
+			this.env.unTour();
 		}));
 		gameloop.getKeyFrames().add(kf);
 	}
-
 }

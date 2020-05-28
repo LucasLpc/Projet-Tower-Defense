@@ -15,8 +15,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = FXMLLoader.load(getClass().getResource("vue/vue1.fxml"));
-			Scene scene = new Scene(root,800,600);
+			Scene scene = new Scene(root,1920,1080);
 			primaryStage.setScene(scene);
+			primaryStage.setMaximized(true);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

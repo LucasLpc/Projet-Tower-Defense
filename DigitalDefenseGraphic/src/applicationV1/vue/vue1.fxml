@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -34,10 +35,36 @@
                   <Button mnemonicParsing="false" onAction="#ajouterActeur" text="Ajouter" />
                   <Button mnemonicParsing="false" text="Incr. la manche" />
                   <Button mnemonicParsing="false" text="Finir la manche (killall)" />
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgMinigun" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="ressources/Tourelles/TourelleMinigun.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
+                     </VBox.margin></ImageView>
+                  <ImageView fx:id="imgShotgun" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="ressources/Tourelles/TourelleShotgun.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
+                     </VBox.margin></ImageView>
+                  <ImageView fx:id="imgSniper" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="ressources/Tourelles/TourelleSniper.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
+                     </VBox.margin></ImageView>
+                  <ImageView fx:id="imgLanceGrenade" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="ressources/Tourelles/TourelleLanceGrenade.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
+                     </VBox.margin></ImageView>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
          </children></VBox>
    </right>
    <center>

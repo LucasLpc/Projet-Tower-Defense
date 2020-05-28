@@ -107,8 +107,7 @@ public class Environnement {
 		}
 		for(int j = 0; j < getNbTourelles(); j++) {
 			this.tourelles.get(j).agir();
-			this.tourelles.get(j).getAngle();
-			
+			this.tourelles.get(j).getAngle();		
 		}
 		this.nbTours += 1;
 	}
@@ -116,9 +115,11 @@ public class Environnement {
 	public void ajouterTourelle(Tourelle t) {
 		this.tourelles.add(t);
 	}
+	
 	public void ajouterEnnemi(Ennemi e) {
 		this.ennemis.add(e);
 	}
+	
 	public void delEnnemi(String id) {
 		for(int i = getNbEnnemis()-1 ; i >= 0; i--) {
 			if(getEnnemis().get(i).getId() == id) {
@@ -126,19 +127,7 @@ public class Environnement {
 			}
 		}
 	}
-	public void PosAleatoire(Acteur a) {
-		if(a instanceof Ennemi) {
-			do {
-				a.nouvellePosition();
-			}while(this.terrain2D[a.getX()][a.getY()] != 'v');
-		}
-		if(a instanceof Tourelle) {
-			do {
-				a.nouvellePosition();
-			}while(this.terrain2D[a.getX()][a.getY()] != 'c');
-		}
-	}
-
+	
 	public boolean positionValableEnnemi(int x, int y) {
 		// cette methode permet de savoir si un ennemi est autorise a acceder à  cette position.
 		if(this.terrain2D[x][y] != 'c') {
