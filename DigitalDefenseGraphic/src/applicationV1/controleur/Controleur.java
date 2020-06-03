@@ -113,6 +113,7 @@ public class Controleur implements Initializable{
 		gameloop.play();
 		this.env.getEnnemis().addListener(new ObservateurEnnemis(this.spritePane));
 		this.env.getTourelles().addListener(new ObservateurTourelles(this.spritePane));
+		this.env.getTirs().addListener(new ObservateurTirs(this.spritePane));
 	}
 	public void initTour() {
 		gameloop = new Timeline();

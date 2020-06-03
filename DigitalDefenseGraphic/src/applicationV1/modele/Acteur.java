@@ -14,11 +14,11 @@ public abstract class Acteur {
 	public static int compteur=0;
 	protected String id;
 
-	public Acteur(int x, int y, Environnement env) {
+	public Acteur(int x, int y, int x64, int y64, Environnement env) {
 		this.x = new SimpleIntegerProperty(x);
 		this.y = new SimpleIntegerProperty(y);
-		this.x64 = new SimpleIntegerProperty(x*64);
-		this.y64 = new SimpleIntegerProperty(y*64);
+		this.x64 = new SimpleIntegerProperty(x64);
+		this.y64 = new SimpleIntegerProperty(y64);
 		this.env = env;
 		this.id="#"+compteur;
 		compteur++;
@@ -48,7 +48,10 @@ public abstract class Acteur {
 	}
 	
 	public abstract void agir();
-	public abstract String getId();
+	
+	public String getId() {
+		return this.id;
+	}
 	
 	public final int getX() {
 		return this.x.getValue();
@@ -56,6 +59,14 @@ public abstract class Acteur {
 	
 	public final int getY() {
 		return this.y.getValue();
+	}
+	
+	public final int getX64() {
+		return this.x64.getValue();
+	}
+	
+	public final int getY64() {
+		return this.y64.getValue();
 	}
 	
 	public final void setX(int x) {
@@ -66,6 +77,26 @@ public abstract class Acteur {
 	public final void setY(int y) {
 		this.y.setValue(y);
 		this.y64.setValue(y*64);
+	}
+	
+	public final void setX64(int x64) {
+		this.x64.setValue(x64);
+		if(x64%64 > 0) {
+			this.setX(x64/64 +1);
+		}
+		else {
+			this.setX(x64/64);
+		}
+	}
+	
+	public final void setY64(int y64) {
+		this.y64.setValue(y64);
+		if(y64%64 > 0) {
+			this.setY(y64/64 +1);
+		}
+		else {
+			this.setY(y64/64);
+		}
 	}
 	
 	public final IntegerProperty getXProperty() {

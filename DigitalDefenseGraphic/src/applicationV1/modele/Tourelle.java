@@ -12,15 +12,7 @@ public class Tourelle extends Acteur{
 
 	public Tourelle(int x, int y, int deg, int port, Environnement env) {
 		// Creation d'une tourelle sur une position donnee.
-		super(x, y, env);
-		this.degats = deg;
-		this.portee = port;
-		this.angle = new SimpleDoubleProperty(0);
-	}
-	
-	public Tourelle(int deg, int port, Environnement env) {
-		// Creation d'une tourelle avec un position aleatoire
-		super(env);
+		super(x, y, x*64, y*64, env);
 		this.degats = deg;
 		this.portee = port;
 		this.angle = new SimpleDoubleProperty(0);
@@ -39,10 +31,7 @@ public class Tourelle extends Acteur{
 			j++;
 		}while(j < this.env.getNbEnnemis());
 	}
-	
-	public String getId() {
-		return this.id;
-	}
+
 	public double getAngle() {
 		return this.angle.getValue();
 	}
@@ -65,6 +54,8 @@ public class Tourelle extends Acteur{
 	
 	public void attaquer(Ennemi e) {
 		e.perdreHp(this.degats);
+		Tir t = new Tir(this.getX64()+32, this.getY64()+32, this.env, this.degats, e);
+		this.env.ajouterTir(t);
 		System.out.println();
 		System.out.println(e + " a perdu " + this.degats + " HP");
 	}

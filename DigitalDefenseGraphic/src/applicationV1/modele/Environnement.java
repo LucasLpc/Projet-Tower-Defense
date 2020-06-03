@@ -14,7 +14,9 @@ public class Environnement {
 
 	private ObservableList<Ennemi> ennemis;
 	private ObservableList<Tourelle> tourelles;
+	private ObservableList<Tir> tirs;
 	private int nbTours;
+	private Bfs bfs;
 	private char terrain[] = {'c','v','v','v','v','v','v','v','v','v',
 							'c','v','v','v','v','v','v','v','v','v',
 							'c','c','c','v','v','c','c','c','v','v',
@@ -30,61 +32,11 @@ public class Environnement {
 	public Environnement() {
 		this.ennemis = FXCollections.observableArrayList();
 		this.tourelles = FXCollections.observableArrayList();
+		this.tirs = FXCollections.observableArrayList();
+		this.bfs = new Bfs(this.getTerrain2D());
 	}
 	public char[][] getTerrain2D() {
 		return terrain2D;
-	}
-	public ArrayList<Noeud> BFS(int x,int y){			
-		ArrayList<Noeud> file = new ArrayList<Noeud>();
-		Noeud noeud = new Noeud(x,y,0);
-		file.add(noeud);
-		while(!(noeud.getX() == 0 && noeud.getY() == 0)) {
-			noeud = file.get(file.size()-1);
-			noeud.adjacent = adjacents(noeud);
-			for(Noeud adjNoeud : noeud.adjacent) {
-				if(!adjNoeud.estDansListe(file)) {
-//					System.out.println(adjNoeud);					
-					file.add(adjNoeud);
-				}
-			}
-		}
-		return file;
-		
-	}
-	private LinkedList<Noeud> adjacents(Noeud noeud){
-
-		LinkedList<Noeud> file = new LinkedList<>();
-		int distance = noeud.getDistance()+1;
-		if(this.terrain2D.length > noeud.getX()+1) {
-            if(this.terrain2D[noeud.getY()][noeud.getX()+1] == 'c') 
-                file.add(new Noeud(noeud.getX()+1,noeud.getY(),distance));
-//            else System.out.println("la case X+1 n'est pas pratiquable");
-        }
-//            else System.out.println("la case X+1 n'est pas valable");
-
-        if(0 <= noeud.getX()-1) {
-            if(this.terrain2D[noeud.getY()][noeud.getX()-1] == 'c') 
-                file.add(new Noeud(noeud.getX()-1,noeud.getY(),distance));
-//            else System.out.println("la case X-1 n'est pas pratiquable");
-            }
-//            else System.out.println("la case X-1 n'est pas valable");
-
-        if(this.terrain2D[0].length > noeud.getY()+1) {
-            if(this.terrain2D[noeud.getY()+1][noeud.getX()] == 'c') 
-                file.add(new Noeud(noeud.getX(),noeud.getY()+1,distance));
-//            else System.out.println("la case Y+1 n'est pas pratiquable");
-      }
-//            else System.out.println("la case Y+1 n'est pas valable");
-
-        if(0 <= noeud.getY()-1) {
-            if (this.terrain2D[noeud.getY()-1][noeud.getX()] == 'c') 
-                file.add(new Noeud(noeud.getX(),noeud.getY()-1,distance));
-//            else System.out.println("la case Y-1 n'est pas pratiquable");
-        }
-//        else System.out.println("la case Y-1 n'est pas valable");
-
-
-		return file;
 	}
 	
 	private char[][] tab2D(char[] n, int ligne, int colonne) {
@@ -109,6 +61,9 @@ public class Environnement {
 			this.tourelles.get(j).agir();
 			this.tourelles.get(j).getAngle();		
 		}
+		for(int k = 0; k < getNbTirs(); k++) {
+			this.tirs.get(k).agir();
+		}
 		this.nbTours += 1;
 	}
 
@@ -118,6 +73,10 @@ public class Environnement {
 	
 	public void ajouterEnnemi(Ennemi e) {
 		this.ennemis.add(e);
+	}
+	
+	public void ajouterTir(Tir t) {
+		this.tirs.add(t);
 	}
 	
 	public void delEnnemi(String id) {
@@ -156,6 +115,10 @@ public class Environnement {
 		return this.tourelles.size();
 	}
 	
+	public int getNbTirs() {
+		return this.tirs.size();
+	}
+	
 	public ObservableList<Ennemi> getEnnemis() {
 		return this.ennemis;
 	}
@@ -164,12 +127,20 @@ public class Environnement {
 		return this.tourelles;
 	}
 	
+	public ObservableList<Tir> getTirs(){
+		return this.tirs;
+	}
+	
 	public char getCase(int x, int y) {
 		return this.terrain2D[x][y];
 	}
 	
 	public char[][] getTerrain(){
 		return this.terrain2D;
+	}
+	
+	public Bfs getBfs() {
+		return this.bfs;
 	}
 	
 	@Override
