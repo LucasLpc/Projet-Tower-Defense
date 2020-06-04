@@ -33,6 +33,7 @@ public class ObservateurEnnemis implements ListChangeListener<Ennemi>{
 		r.setOnMouseClicked((env) -> System.out.println(e));
 		r.translateXProperty().bind(e.getX64Property());
 		r.translateYProperty().bind(e.getY64Property());
+		r.rotateProperty().bind(e.getAngleProperty());
 		r.setId(e.getId());
 		this.spritePane.getChildren().add(r);
 	}

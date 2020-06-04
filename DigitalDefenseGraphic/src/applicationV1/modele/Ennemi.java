@@ -6,12 +6,15 @@ import java.util.Random;
 import applicationV1.modele.Acteur;
 import applicationV1.modele.Environnement;
 import applicationV1.modele.Noeud;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 public class Ennemi extends Acteur{
 	private int vitesse;
 	private int direction;
 	private int hp;
 	private int compteur;
+	private DoubleProperty angle;
 
 	public Ennemi(int x, int y, int v, int d, int hp, Environnement env) {
 		super(x, y, x*64, y*64, env);
@@ -19,6 +22,7 @@ public class Ennemi extends Acteur{
 		this.direction = d;
 		this.hp = hp;
 		this.compteur = 0;
+		this.angle = new SimpleDoubleProperty(angleDeCetteDirection(this.direction));
 	}
 	
 	public Ennemi(int v, int hp, Environnement env) {
@@ -27,6 +31,7 @@ public class Ennemi extends Acteur{
 		this.vitesse = v;
 		this.hp = hp;
 		this.compteur = 0;
+		this.angle = new SimpleDoubleProperty(angleDeCetteDirection(this.direction));
 	}
 	
 	public void seDeplacer() {
@@ -68,12 +73,16 @@ public class Ennemi extends Acteur{
 				this.direction = 3;
 			}
 			this.compteur = 0;
+			refreshAngle();
 		}
 	}
 	
 	public void agir() {
 		if(estMort()) {
 			this.env.delEnnemi(this.getId());
+		}
+		else if (estArrive()) {
+			atteindreFin();
 		}
 		else {
 			this.seDeplacer();
@@ -111,6 +120,47 @@ public class Ennemi extends Acteur{
 		else {
 			return false;
 		}
+	}
+	
+	public double angleDeCetteDirection(int d) {
+		switch(d) {
+		case 0:
+			return 270;
+		case 1:
+			return 90;
+		case 2:
+			return 0;
+		default:
+			return 180;
+		
+		}
+	}
+	
+	public boolean estArrive() {
+		if (this.getX64() == 9*64 && this.getY64() == 9*64) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public void atteindreFin() {
+		this.env.delEnnemi(this.getId());
+	}
+	
+	public void refreshAngle() {
+		setAngle(angleDeCetteDirection(this.direction));
+	}
+	
+	public double getAngle() {
+		return this.angle.getValue();
+	}
+	public void setAngle(double angle) {
+		this.angle.setValue(angle);
+	}
+	public DoubleProperty getAngleProperty() {
+		return angle;
 	}
 
 	@Override

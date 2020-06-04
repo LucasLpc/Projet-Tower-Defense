@@ -60,10 +60,9 @@ public class Tourelle extends Acteur{
 		System.out.println(e + " a perdu " + this.degats + " HP");
 	}
 	public void regarder(Ennemi e) {
-		double xDist = e.getX() - this.getX();
-		double yDist = e.getY() - this.getY();
+		double xDist = e.getX64() - this.getX64();
+		double yDist = e.getY64() - this.getY64();
 		this.setAngle((int)Math.toDegrees(-Math.atan2(xDist, yDist)));
-
 	};
 	@Override
 	public String toString() {
