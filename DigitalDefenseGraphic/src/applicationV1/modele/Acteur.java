@@ -71,12 +71,10 @@ public abstract class Acteur {
 	
 	public final void setX(int x) {
 		this.x.setValue(x);
-		this.x64.setValue(x*64);
 	}
 	
 	public final void setY(int y) {
 		this.y.setValue(y);
-		this.y64.setValue(y*64);
 	}
 	
 	public final void setX64(int x64) {
