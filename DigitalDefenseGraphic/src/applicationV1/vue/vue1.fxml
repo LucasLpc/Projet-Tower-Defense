@@ -21,48 +21,26 @@
          <children>
             <VBox prefHeight="235.0" prefWidth="168.0">
                <children>
-                  <HBox prefHeight="14.0" prefWidth="115.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="Coyote">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="EnnemiToggle" />
-                           </toggleGroup>
-                        </RadioButton>
-                     </children></HBox>
+                  <RadioButton mnemonicParsing="false" text="Coyote">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="EnnemiToggle" />
+                     </toggleGroup>
+                  </RadioButton>
                   <RadioButton mnemonicParsing="false" text="Hyena" toggleGroup="$EnnemiToggle" />
                   <RadioButton mnemonicParsing="false" text="Bear" toggleGroup="$EnnemiToggle" />
                   <RadioButton mnemonicParsing="false" text="Lion" toggleGroup="$EnnemiToggle" />
                   <Button mnemonicParsing="false" onAction="#ajouterActeur" text="Ajouter" />
                   <Button mnemonicParsing="false" text="Incr. la manche" />
                   <Button mnemonicParsing="false" text="Finir la manche (killall)" />
-                  <ImageView fx:id="imgMinigun" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="ressources/Tourelles/TourelleMinigun.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
-                     </VBox.margin></ImageView>
-                  <ImageView fx:id="imgShotgun" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="ressources/Tourelles/TourelleShotgun.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
-                     </VBox.margin></ImageView>
-                  <ImageView fx:id="imgSniper" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="ressources/Tourelles/TourelleSniper.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
-                     </VBox.margin></ImageView>
-                  <ImageView fx:id="imgLanceGrenade" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="ressources/Tourelles/TourelleLanceGrenade.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
-                     </VBox.margin></ImageView>
+                  <RadioButton fx:id="radioBasique" mnemonicParsing="false" text="tBasique">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="TourelleToggle" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="radioMinigun" mnemonicParsing="false" text="tMinigun" toggleGroup="$TourelleToggle" />
+                  <RadioButton fx:id="radioShotgun" mnemonicParsing="false" text="tShotgun" toggleGroup="$TourelleToggle" />
+                  <RadioButton fx:id="radioSniper" mnemonicParsing="false" text="tSniper" toggleGroup="$TourelleToggle" />
+                  <RadioButton fx:id="radioLG" mnemonicParsing="false" text="tLG" toggleGroup="$TourelleToggle" />
                </children>
             </VBox>
          </children></VBox>

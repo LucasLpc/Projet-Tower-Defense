@@ -25,15 +25,15 @@ public class ObservateurTourelles implements ListChangeListener<Tourelle>{
 	public void creerSprite(Tourelle t) {
 		ImageView r = null;
 		if(t instanceof TourelleBasique) 
-			r = new ImageView("ressources/Tourelles/tourelleMinigun.png");
+			r = new ImageView("ressources/Tourelles/tourelleBasique.png");
 		if(t instanceof TourelleMinigun)
 			r = new ImageView("ressources/Tourelles/tourelleMinigun.png");
 		if(t instanceof TourelleShotgun)
-			r = new ImageView("ressources/Tourelles/tourelleMinigun.png");
+			r = new ImageView("ressources/Tourelles/tourelleShotgun.png");
 		if(t instanceof TourelleSniper)
-			r = new ImageView("ressources/Tourelles/tourelleMinigun.png");
+			r = new ImageView("ressources/Tourelles/tourelleSniper.png");
 		if(t instanceof TourelleLanceGrenade)
-			r = new ImageView("ressources/Tourelles/tourelleMinigun.png");
+			r = new ImageView("ressources/Tourelles/tourelleLanceGrenade.png");
 		r.setOnMouseClicked((e) -> System.out.println(t));
 		//à modifier
 		r.translateXProperty().bind(t.getX64Property());
