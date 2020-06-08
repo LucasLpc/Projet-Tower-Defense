@@ -85,7 +85,9 @@ public class Ennemi extends Acteur{
 			atteindreFin();
 		}
 		else {
-			this.seDeplacer();
+			if(this.env.getNbTours() % 5 == 0) {
+				this.seDeplacer();
+			}
 		}
 	}
 
@@ -147,6 +149,7 @@ public class Ennemi extends Acteur{
 	
 	public void atteindreFin() {
 		this.env.delEnnemi(this.getId());
+		this.env.getBase().subirDegats(10);
 	}
 	
 	public void refreshAngle() {
@@ -156,9 +159,11 @@ public class Ennemi extends Acteur{
 	public double getAngle() {
 		return this.angle.getValue();
 	}
+	
 	public void setAngle(double angle) {
 		this.angle.setValue(angle);
 	}
+	
 	public DoubleProperty getAngleProperty() {
 		return angle;
 	}

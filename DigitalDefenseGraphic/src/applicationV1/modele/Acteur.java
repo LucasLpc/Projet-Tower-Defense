@@ -2,14 +2,16 @@ package applicationV1.modele;
 
 import java.util.Random;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Acteur {
 	private IntegerProperty x;
 	private IntegerProperty y;
-	private IntegerProperty x64;
-	private IntegerProperty y64;
+	private DoubleProperty x64;
+	private DoubleProperty y64;
 	protected Environnement env;
 	public static int compteur=0;
 	protected String id;
@@ -17,8 +19,16 @@ public abstract class Acteur {
 	public Acteur(int x, int y, int x64, int y64, Environnement env) {
 		this.x = new SimpleIntegerProperty(x);
 		this.y = new SimpleIntegerProperty(y);
-		this.x64 = new SimpleIntegerProperty(x64);
-		this.y64 = new SimpleIntegerProperty(y64);
+		this.x64 = new SimpleDoubleProperty(x64);
+		this.y64 = new SimpleDoubleProperty(y64);
+		this.env = env;
+		this.id="#"+compteur;
+		compteur++;
+	}
+	
+	public Acteur(int x64, int y64, Environnement env) {
+		setX64(x64);
+		setY64(y64);
 		this.env = env;
 		this.id="#"+compteur;
 		compteur++;
@@ -31,8 +41,8 @@ public abstract class Acteur {
 		int yRandom = random.nextInt(env.getHauteur());
 		this.x = new SimpleIntegerProperty(xRandom);
 		this.y = new SimpleIntegerProperty(yRandom);
-		this.x64 = new SimpleIntegerProperty(xRandom*64);
-		this.y64 = new SimpleIntegerProperty(yRandom*64);
+		this.x64 = new SimpleDoubleProperty(xRandom*64);
+		this.y64 = new SimpleDoubleProperty(yRandom*64);
 		this.env = env;
 		this.id="#"+compteur;
 		compteur++;
@@ -61,11 +71,11 @@ public abstract class Acteur {
 		return this.y.getValue();
 	}
 	
-	public final int getX64() {
+	public final double getX64() {
 		return this.x64.getValue();
 	}
 	
-	public final int getY64() {
+	public final double getY64() {
 		return this.y64.getValue();
 	}
 	
@@ -77,23 +87,23 @@ public abstract class Acteur {
 		this.y.setValue(y);
 	}
 	
-	public final void setX64(int x64) {
+	public final void setX64(double x64) {
 		this.x64.setValue(x64);
 		if(x64%64 > 0) {
-			this.setX(x64/64 +1);
+			this.setX(((int)x64/64) +1);
 		}
 		else {
-			this.setX(x64/64);
+			this.setX(((int)x64/64));
 		}
 	}
 	
-	public final void setY64(int y64) {
+	public final void setY64(double y64) {
 		this.y64.setValue(y64);
 		if(y64%64 > 0) {
-			this.setY(y64/64 +1);
+			this.setY(((int)y64/64) +1);
 		}
 		else {
-			this.setY(y64/64);
+			this.setY(((int)y64/64));
 		}
 	}
 	
@@ -105,11 +115,11 @@ public abstract class Acteur {
 		return this.y;
 	}
 	
-	public final IntegerProperty getX64Property() {
+	public final DoubleProperty getX64Property() {
 		return this.x64;
 	}
 	
-	public final IntegerProperty getY64Property() {
+	public final DoubleProperty getY64Property() {
 		return this.y64;
 	}
 	

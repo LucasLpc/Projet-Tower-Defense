@@ -17,6 +17,7 @@ public class Environnement {
 	private ObservableList<Tir> tirs;
 	private int nbTours;
 	private Bfs bfs;
+	private Base base;
 	private char terrain[] = {'c','v','v','v','v','v','v','v','v','v',
 							'c','v','v','v','v','v','v','v','v','v',
 							'c','c','c','v','v','c','c','c','v','v',
@@ -33,7 +34,14 @@ public class Environnement {
 		this.ennemis = FXCollections.observableArrayList();
 		this.tourelles = FXCollections.observableArrayList();
 		this.tirs = FXCollections.observableArrayList();
-		this.bfs = new Bfs(this.getTerrain2D());
+		this.base = new Base(9, 9, 9*64, 9*64, 50, this);
+		this.bfs = new Bfs(this);
+	}
+	public Base getBase() {
+		return base;
+	}
+	public void setBase(Base base) {
+		this.base = base;
 	}
 	public char[][] getTerrain2D() {
 		return terrain2D;
@@ -87,6 +95,14 @@ public class Environnement {
 		}
 	}
 	
+	public void delTir(String id) {
+		for(int i = getNbTirs()-1 ; i >= 0; i--) {
+			if(getTirs().get(i).getId() == id) {
+				this.tirs.remove(i);
+			}
+		}
+	}
+	
 	public boolean positionValableEnnemi(int x, int y) {
 		// cette methode permet de savoir si un ennemi est autorise a acceder à  cette position.
 		if(this.terrain2D[x][y] != 'c') {
@@ -117,6 +133,10 @@ public class Environnement {
 	
 	public int getNbTirs() {
 		return this.tirs.size();
+	}
+	
+	public int getNbTours() {
+		return this.nbTours;
 	}
 	
 	public ObservableList<Ennemi> getEnnemis() {

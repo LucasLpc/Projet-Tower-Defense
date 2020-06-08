@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Bfs {
+	private Environnement env;
 	private char terrain2D[][];
 	private int terrainAvecDistances[][];
+	private Base base;
 	
-	public Bfs(char terrain2D[][]) {
-		this.terrain2D = terrain2D;
-		this.terrainAvecDistances = chargerTerrainBfs(9, 9);
+	public Bfs(Environnement env) {
+		this.env = env;
+		this.terrain2D = env.getTerrain2D();
+		this.base = env.getBase();
+		this.terrainAvecDistances = chargerTerrainBfs(base.getX(), base.getY());
 	}
 	
 	public int[][] chargerTerrainBfs(int x, int y){

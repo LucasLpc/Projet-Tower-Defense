@@ -4,8 +4,14 @@ import java.awt.Color;
 
 import applicationV1.modele.Acteur;
 import applicationV1.modele.Tir;
+import applicationV1.modele.EnnemiType.EnnemiBear;
+import applicationV1.modele.EnnemiType.EnnemiCoyote;
+import applicationV1.modele.EnnemiType.EnnemiHyena;
+import applicationV1.modele.EnnemiType.EnnemiLion;
+import javafx.animation.Animation;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -21,15 +27,14 @@ public class ObservateurTirs implements ListChangeListener<Tir>{
 	}
 	
 	public void creerSprite(Tir t) {
-		Circle c = new Circle(4);
-		c.translateXProperty().bind(t.getX64Property());
-		c.translateYProperty().bind(t.getY64Property());
-		c.setId(t.getId());
-		this.spritePane.getChildren().add(c);
+		ImageView r = new ImageView("ressources/Ennemis/tir.png");
+		r.translateXProperty().bind(t.getX64Property());
+		r.translateYProperty().bind(t.getY64Property());
+		r.setId(t.getId());
+		this.spritePane.getChildren().add(r);
 	}
 	
 	public void enleverSprite(Tir mort) {
-		System.out.println(mort.getId());
 		this.spritePane.getChildren().remove(this.spritePane.lookup("#" + mort.getId()));
 	}
 	

@@ -17,27 +17,29 @@ public class Tourelle extends Acteur{
 		this.portee = port;
 		this.angle = new SimpleDoubleProperty(0);
 	}
-	
+
 	public void agir() {
 		int j = 0;
-		do {
-			if(this.env.getNbEnnemis() > 0) {
+		if(this.env.getNbEnnemis() > 0) {
+			do {
 				if (this.aPortee(this.env.getEnnemis().get(j))) {
 					this.regarder(this.env.getEnnemis().get(j));
 					this.attaquer(this.env.getEnnemis().get(j));
 					j = this.env.getNbEnnemis();
 				}
-			}
-			j++;
-		}while(j < this.env.getNbEnnemis());
+				j++;
+			} while (j < this.env.getNbEnnemis());
+		}
 	}
-
+	
 	public double getAngle() {
 		return this.angle.getValue();
 	}
+	
 	public void setAngle(double angle) {
 		this.angle.setValue(angle);
 	}
+	
 	public DoubleProperty getAngleProperty() {
 		return angle;
 	}
@@ -53,17 +55,18 @@ public class Tourelle extends Acteur{
 	}
 	
 	public void attaquer(Ennemi e) {
-		e.perdreHp(this.degats);
-		Tir t = new Tir(this.getX64()+32, this.getY64()+32, this.env, this.degats, e);
-		this.env.ajouterTir(t);
-		System.out.println();
-		System.out.println(e + " a perdu " + this.degats + " HP");
+		if(this.env.getNbTours() % 100 == 0) {
+			Tir t = new Tir(this.getX(), this.getY(), this.env, this.degats, e);
+			this.env.ajouterTir(t);
+		}
 	}
+	
 	public void regarder(Ennemi e) {
 		double xDist = e.getX64() - this.getX64();
 		double yDist = e.getY64() - this.getY64();
 		this.setAngle((int)Math.toDegrees(-Math.atan2(xDist, yDist)));
-	};
+	}
+	
 	@Override
 	public String toString() {
 		return "Tourelle [degats=" + degats + ", portee=" + portee + ", Angle : " + angle +  " " + super.toString() + "]";
