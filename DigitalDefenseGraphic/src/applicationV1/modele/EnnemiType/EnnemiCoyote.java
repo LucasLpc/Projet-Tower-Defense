@@ -6,7 +6,7 @@ import applicationV1.modele.Environnement;
 public class EnnemiCoyote extends Ennemi{
 
 	public EnnemiCoyote(Environnement env) {
-		super(1, 100, env);
+		super(5, 100, env);
 	}
 
 }

@@ -6,7 +6,7 @@ import applicationV1.modele.Environnement;
 public class EnnemiBear extends Ennemi{
 
 	public EnnemiBear(Environnement env) {
-		super(1, 500, env);
+		super(8, 500, env);
 		// TODO Auto-generated constructor stub
 	}
 

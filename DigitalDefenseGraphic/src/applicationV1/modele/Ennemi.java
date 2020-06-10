@@ -35,8 +35,6 @@ public class Ennemi extends Acteur{
 	}
 	
 	public void seDeplacer() {
-		
-		
 		if(this.compteur < 64) {
 			switch(this.direction) {
 			case 0 :
@@ -85,7 +83,7 @@ public class Ennemi extends Acteur{
 			atteindreFin();
 		}
 		else {
-			if(this.env.getNbTours() % 5 == 0) {
+			if(this.env.getNbTours() % vitesse == 0) {
 				this.seDeplacer();
 			}
 		}
