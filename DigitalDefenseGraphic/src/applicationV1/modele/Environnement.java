@@ -36,6 +36,15 @@ public class Environnement {
 		this.cptMancheGlobale = new SimpleIntegerProperty(0);
 		this.statutPartie = new SimpleBooleanProperty(true);
 	}
+	public BooleanProperty getStatutPartieProperty() {
+		return statutPartie;
+	}
+	public void setStatutPartie(boolean b) {
+		this.statutPartie.setValue(b);
+	}
+	public boolean getStatutPartie() {
+		return this.statutPartie.getValue();
+	}
 	public IntegerProperty getCptMancheGlobaleProperty() {
 		return cptMancheGlobale;
 	}

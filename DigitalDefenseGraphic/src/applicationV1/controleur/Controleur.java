@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +31,7 @@ public class Controleur implements Initializable{
 
 	private Environnement env;
 	private Timeline gameloop;
+	private BooleanProperty statut;
 
 	@FXML
 	private Pane spritePane;

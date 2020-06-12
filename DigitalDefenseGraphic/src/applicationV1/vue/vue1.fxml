@@ -32,14 +32,19 @@
                   <Button mnemonicParsing="false" onAction="#ajouterActeur" text="Ajouter" />
                   <Button mnemonicParsing="false" onAction="#nvlManche" text="Nouvelle Manche  " />
                   <Button mnemonicParsing="false" onAction="#killAllAction" text="killall" />
+                  <Label text="Prix : 5 Okanes" />
                   <RadioButton fx:id="radioBasique" mnemonicParsing="false" text="tBasique">
                      <toggleGroup>
                         <ToggleGroup fx:id="TourelleToggle" />
                      </toggleGroup>
                   </RadioButton>
+                  <Label text="Prix :  20 Okanes" />
                   <RadioButton fx:id="radioMinigun" mnemonicParsing="false" text="tMinigun" toggleGroup="$TourelleToggle" />
+                  <Label text="Prix : 40 Okanes" />
                   <RadioButton fx:id="radioShotgun" mnemonicParsing="false" text="tShotgun" toggleGroup="$TourelleToggle" />
+                  <Label text="Prix : 60 Okanes" />
                   <RadioButton fx:id="radioSniper" mnemonicParsing="false" text="tSniper" toggleGroup="$TourelleToggle" />
+                  <Label text="Prix : 50 Okanes" />
                   <RadioButton fx:id="radioLG" mnemonicParsing="false" text="tLG" toggleGroup="$TourelleToggle" />
                </children>
             </VBox>
