@@ -35,6 +35,7 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import applicationV1.modele.*;
 import applicationV1.modele.EnnemiType.*;
+import applicationV1.modele.TirType.TirSniper;
 import applicationV1.modele.TourelleType.TourelleBasique;
 import applicationV1.modele.TourelleType.TourelleLanceGrenade;
 import applicationV1.modele.TourelleType.TourelleMinigun;
@@ -84,6 +85,7 @@ public class Controleur implements Initializable{
 		for(Ennemi e : this.env.getEnnemis()) e.mourrir();
 	}
 	void initTiles(){
+		System.out.println(this.env.getTerrain().length);
 		for(int i = 0; i < this.env.getTerrain().length; i++) {
 			for(int j = 0; j < this.env.getTerrain()[0].length; j++) {
 				this.tileMap.getChildren().add(obtenirImage(this.env.getTerrain()[i][j]));
@@ -116,7 +118,7 @@ public class Controleur implements Initializable{
 			tile = new ImageView("ressources/brick.png");
 			return tile;
 		case 'c':
-			tile = new ImageView("ressources/wood.png");
+			tile = new ImageView("ressources/sol.png");
 			return tile;
 		case 't':
 			tile = new EmpTourelle();
@@ -165,7 +167,7 @@ public class Controleur implements Initializable{
 		this.env.getEnnemis().addListener(new ObservateurEnnemis(this.spritePane));
 		this.env.getTourelles().addListener(new ObservateurTourelles(this.spritePane));
 		this.env.getTirs().addListener(new ObservateurTirs(this.spritePane));
-		initSelection(TourelleToggle);
+		
 	}
 	public void initTour() {
 		gameloop = new Timeline();
@@ -174,5 +176,6 @@ public class Controleur implements Initializable{
 			this.env.unTour();
 		}));
 		gameloop.getKeyFrames().add(kf);
+		
 	}
 }

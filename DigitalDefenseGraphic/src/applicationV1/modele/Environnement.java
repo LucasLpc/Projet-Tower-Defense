@@ -28,9 +28,10 @@ public class Environnement {
 	private static int cptManche = 0;
 	private static IntegerProperty cptMancheGlobale;
 	private static int difficulté = 1;
-	private char terrain2D[][] = Config.tab2D();
+	private char[][] terrain2D = new char[10][14];
 	
 	public Environnement() {
+		this.terrain2D = Config.tab2D();
 		this.ennemis = FXCollections.observableArrayList();
 		this.tourelles = FXCollections.observableArrayList();
 		this.tirs = FXCollections.observableArrayList();
