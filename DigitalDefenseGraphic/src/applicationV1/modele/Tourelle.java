@@ -6,15 +6,17 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Tourelle extends Acteur{
-	private int degats;
+	protected int degats;
 	private int portee;
+	private int cadence;
 	private DoubleProperty angle;
 	private int prix;
 	private Effet effet;
 
-	public Tourelle(int x, int y, int deg, int port, Environnement env, int prix) {
+	public Tourelle(int x, int y, int deg, int port, int cadence, Environnement env, int prix) {
 		// Creation d'une tourelle sur une position donnee.
 		super(x, y, x*64, y*64, env);
+		this.cadence = cadence;
 		this.degats = deg;
 		this.portee = port;
 		this.angle = new SimpleDoubleProperty(0);
@@ -44,6 +46,10 @@ public abstract class Tourelle extends Acteur{
 		return this.angle.getValue();
 	}
 	
+	public int getCadence() {
+		return this.cadence;
+	}
+	
 	public void setAngle(double angle) {
 		this.angle.setValue(angle);
 	}
@@ -62,12 +68,7 @@ public abstract class Tourelle extends Acteur{
 		}
 	}
 	
-	public void attaquer(Ennemi e) {
-		if(this.env.getNbTours() % 100 == 0) {
-			Tir t = new Tir(this.getX(), this.getY(), this.env, this.degats, e, this.effet);
-			this.env.ajouterTir(t);
-		}
-	}
+	public abstract void attaquer(Ennemi e);
 	
 	public void regarder(Ennemi e) {
 		double xDist = e.getX64() - this.getX64();

@@ -4,10 +4,10 @@ import java.awt.Color;
 
 import applicationV1.modele.Acteur;
 import applicationV1.modele.Tir;
-import applicationV1.modele.EnnemiType.EnnemiBear;
-import applicationV1.modele.EnnemiType.EnnemiCoyote;
-import applicationV1.modele.EnnemiType.EnnemiHyena;
-import applicationV1.modele.EnnemiType.EnnemiLion;
+import applicationV1.modele.TirType.TirBasique;
+import applicationV1.modele.TirType.TirLanceGrenade;
+import applicationV1.modele.TirType.TirShotGun;
+import applicationV1.modele.TirType.TirSniper;
 import javafx.animation.Animation;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
@@ -27,10 +27,32 @@ public class ObservateurTirs implements ListChangeListener<Tir>{
 	}
 	
 	public void creerSprite(Tir t) {
-		ImageView r = new ImageView("ressources/Ennemis/tir.png");
-		r.translateXProperty().bind(t.getX64Property());
-		r.translateYProperty().bind(t.getY64Property());
-		r.setId(t.getId());
+		ImageView r = null;
+		if(t instanceof TirSniper) {
+			r = new ImageView("ressources/Tirs/tir.png");
+			r.translateXProperty().bind(t.getX64Property());
+			r.translateYProperty().bind(t.getY64Property());
+			r.setId(t.getId());
+		}
+		if(t instanceof TirLanceGrenade) {
+			r = new ImageView("ressources/Tirs/tirLanceGrenade.png");
+			r.translateXProperty().bind(t.getX64Property());
+			r.translateYProperty().bind(t.getY64Property());
+			r.setId(t.getId());
+		}
+		if(t instanceof TirBasique) {
+			r = new ImageView("ressources/Tirs/tir.png");
+			r.translateXProperty().bind(t.getX64Property());
+			r.translateYProperty().bind(t.getY64Property());
+			r.setId(t.getId());
+		}
+		if(t instanceof TirShotGun) {
+			r = new ImageView("ressources/Tirs/tirShotGun.png");
+			r.translateXProperty().bind(t.getX64Property());
+			r.translateYProperty().bind(t.getY64Property());
+			r.rotateProperty().bind(t.getAngleProperty());
+			r.setId(t.getId());
+		}
 		this.spritePane.getChildren().add(r);
 	}
 	
