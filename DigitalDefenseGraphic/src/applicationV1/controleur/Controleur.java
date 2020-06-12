@@ -2,36 +2,20 @@ package applicationV1.controleur;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import applicationV1.modele.*;
 import applicationV1.modele.EffetsTypes.*;
@@ -142,7 +126,7 @@ public class Controleur implements Initializable{
 					t.setEffet(new EffetFeu());
 				if(s1.contentEquals("eGaz"))
 					t.setEffet(new EffetGaz());
-				if(s1.contentEquals("eGaz"))
+				if(s1.contentEquals("eGlace"))
 					t.setEffet(new EffetGlace());
 				if(this.env.getBanque().achetable(t.getPrix())) {
 					this.env.getBanque().acheter(t.getPrix());

@@ -1,12 +1,6 @@
 package applicationV1.controleur;
 
-import applicationV1.modele.Acteur;
-import applicationV1.modele.Environnement;
 import applicationV1.modele.Tourelle;
-import applicationV1.modele.EnnemiType.EnnemiBear;
-import applicationV1.modele.EnnemiType.EnnemiCoyote;
-import applicationV1.modele.EnnemiType.EnnemiHyena;
-import applicationV1.modele.EnnemiType.EnnemiLion;
 import applicationV1.modele.TourelleType.*;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
@@ -17,7 +11,6 @@ public class ObservateurTourelles implements ListChangeListener<Tourelle>{
 	
 	@FXML
 	private Pane spritePane;
-	
 	public ObservateurTourelles(Pane spritePane){
 		super();
 		this.spritePane = spritePane;
@@ -39,6 +32,7 @@ public class ObservateurTourelles implements ListChangeListener<Tourelle>{
 		r.translateXProperty().bind(t.getX64Property());
 		r.translateYProperty().bind(t.getY64Property());
 		r.setOnMouseClicked(e->{
+			System.out.println(t);
 			t.getEnv().getTourelles().remove(t);
 			t.getEnv().getBanque().ajouterSolde(t.getPrix()/2);
 		});
@@ -46,8 +40,7 @@ public class ObservateurTourelles implements ListChangeListener<Tourelle>{
 		System.out.println();
 		r.setId(t.getId());
 		this.spritePane.getChildren().add(r);
-	}
-	
+	}	
 	public void enleverSprite(Tourelle mort) {
 		System.out.println(mort.getId());
 		this.spritePane.getChildren().remove(this.spritePane.lookup("#" + mort.getId()));

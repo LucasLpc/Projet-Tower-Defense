@@ -1,9 +1,7 @@
 package applicationV1.modele;
 
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Tourelle extends Acteur{
 	protected int degats;
@@ -86,7 +84,7 @@ public abstract class Tourelle extends Acteur{
 
 	@Override
 	public String toString() {
-		return "Tourelle [degats=" + degats + ", portee=" + portee + ", Angle : " + angle +  " " + super.toString() + "]";
+		return "Tourelle [degats=" + degats + ", portee=" + portee + ", Angle : " + angle +  " " + super.toString() + "Effet : " + effet + "]";
 	}
 
 }
