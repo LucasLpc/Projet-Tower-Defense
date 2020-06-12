@@ -76,7 +76,9 @@ public class Ennemi extends Acteur{
 			refreshAngle();
 		}
 	}
-	
+	public void mourrir() {
+		this.perdreHp(this.hp);
+	}
 	public void agir() {
 		if(estMort()) {
 			this.env.delEnnemi(this.getId());

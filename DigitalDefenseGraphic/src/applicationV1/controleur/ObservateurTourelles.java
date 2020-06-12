@@ -40,6 +40,7 @@ public class ObservateurTourelles implements ListChangeListener<Tourelle>{
 		r.translateYProperty().bind(t.getY64Property());
 		r.setOnMouseClicked(e->{
 			t.getEnv().getTourelles().remove(t);
+			t.getEnv().getBanque().ajouterSolde(t.getPrix()/2);
 		});
 		r.rotateProperty().bind(t.getAngleProperty());
 		System.out.println();

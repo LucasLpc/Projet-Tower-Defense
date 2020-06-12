@@ -8,5 +8,8 @@ public class TourelleShotgun extends Tourelle{
 	public TourelleShotgun(int x, int y, Environnement env) {
 		super(x, y, 100, 2, env, 40);
 	}
-
+	@Override
+	public String getType() {
+		return "Tourelle Shotgun";
+	}
 }

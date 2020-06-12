@@ -31,7 +31,7 @@
                   <RadioButton mnemonicParsing="false" text="Lion" toggleGroup="$EnnemiToggle" />
                   <Button mnemonicParsing="false" onAction="#ajouterActeur" text="Ajouter" />
                   <Button mnemonicParsing="false" onAction="#nvlManche" text="Nouvelle Manche  " />
-                  <Button mnemonicParsing="false" text="killall" />
+                  <Button mnemonicParsing="false" onAction="#killAllAction" text="killall" />
                   <RadioButton fx:id="radioBasique" mnemonicParsing="false" text="tBasique">
                      <toggleGroup>
                         <ToggleGroup fx:id="TourelleToggle" />
@@ -57,6 +57,33 @@
       </Pane>
    </center>
    <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="encadre" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="encadre" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="150.0" prefWidth="122.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="ressources/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="235.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="eChoc">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="EffetToggle" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton mnemonicParsing="false" text="eBrulure" toggleGroup="$EffetToggle" />
+                  <RadioButton mnemonicParsing="false" text="eGel" toggleGroup="$EffetToggle" />
+                  <RadioButton mnemonicParsing="false" text="eGaz" toggleGroup="$EffetToggle" />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+               </HBox.margin>
+            </HBox>
+            <Label fx:id="lblText" alignment="CENTER" prefHeight="150.0" prefWidth="357.0" textAlignment="CENTER" />
+         </children>
+      </HBox>
    </bottom>
 </BorderPane>

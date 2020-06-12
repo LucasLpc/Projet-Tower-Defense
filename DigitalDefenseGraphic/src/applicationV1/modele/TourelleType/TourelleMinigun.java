@@ -9,4 +9,9 @@ public class TourelleMinigun extends Tourelle{
 		super(x, y, 1, 4, env, 20);
 	}
 
+	@Override
+	public String getType() {
+		return "Tourelle Minigun";
+	}
+
 }

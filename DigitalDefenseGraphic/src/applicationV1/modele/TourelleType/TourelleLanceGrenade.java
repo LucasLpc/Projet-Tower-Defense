@@ -9,6 +9,12 @@ public class TourelleLanceGrenade extends Tourelle{
 		super(x, y, 30, 4, env, 50);
 	}
 
+	@Override
+	public String getType() {
+		return "Tourelle Lance-Grenade";
+	}
+	
+
 	
 
 }

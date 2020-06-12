@@ -5,7 +5,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Tourelle extends Acteur{
+public abstract class Tourelle extends Acteur{
 	private int degats;
 	private int portee;
 	private DoubleProperty angle;
@@ -70,6 +70,7 @@ public class Tourelle extends Acteur{
 		double yDist = e.getY64() - this.getY64();
 		this.setAngle((int)Math.toDegrees(-Math.atan2(xDist, yDist)));
 	}
+	public abstract String getType();
 	
 	@Override
 	public String toString() {

@@ -9,4 +9,11 @@ public class TourelleBasique extends Tourelle{
 		super(x, y, 10, 5, env,5);
 	}
 
+	@Override
+	public String getType() {
+		return "Tourelle Basique";
+		
+	}
+	
+
 }

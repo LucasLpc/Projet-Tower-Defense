@@ -58,6 +58,8 @@ public class Controleur implements Initializable{
     private ToggleGroup TourelleToggle;
     @FXML
     private Label labelBourse;
+    @FXML
+    private Label lblText;
 
 	@FXML
 	void ajouterActeur(ActionEvent event) {
@@ -77,6 +79,10 @@ public class Controleur implements Initializable{
     void nvlManche(ActionEvent event) throws IOException{
 		this.env.nouvelleManche();	
     }
+	@FXML
+	void killAllAction(ActionEvent event) {
+		for(Ennemi e : this.env.getEnnemis()) e.mourrir();
+	}
 	void initTiles(){
 		for(int i = 0; i < this.env.getTerrain().length; i++) {
 			for(int j = 0; j < this.env.getTerrain()[0].length; j++) {
@@ -93,15 +99,12 @@ public class Controleur implements Initializable{
 		
 		for(Toggle to : t.getToggles()) {
 			RadioButton rb = (RadioButton)to;
-			rb.setTextFill(Color.TRANSPARENT);
-//			rb.getStyleClass().remove("radio-button");
-			
+			rb.setTextFill(Color.TRANSPARENT);		
 		}
-		System.out.println(t.getSelectedToggle());
-		if(t.getSelectedToggle() != null) {
-			System.out.println(t.getSelectedToggle());
-			((StackPane)((RadioButton)t.getSelectedToggle()).getParent()).getChildren().get(0).setVisible(true);
-		}
+//		if(t.getSelectedToggle() != null) {
+//			System.out.println(t.getSelectedToggle());
+//			((StackPane)((RadioButton)t.getSelectedToggle()).getParent()).getChildren().get(0).setVisible(true);
+//		}
 	}
 	public ImageView obtenirImage(int n) {
 		ImageView tile;
@@ -133,14 +136,18 @@ public class Controleur implements Initializable{
 				if(this.env.getBanque().achetable(t.getPrix())) {
 					this.env.getBanque().acheter(t.getPrix());
 					this.env.ajouterTourelle(t);
+					afficher("Vous avez acheter :" + "\n" + t.getType());
 				}
-				else System.out.println("pas de sous");
+				else afficher("Vous n'avez pas assez d'Okanes " + "\n" + "pour acheter cette Tourelle");
 				
 			});
 			return tile;
 		default:
 			return null;
 		}
+	}
+	public void afficher(String s) {
+		lblText.setText(s);
 	}
 	public void initBinds() {
 		labelNbManche.textProperty().bind(this.env.getCptMancheGlobaleProperty().asString());
