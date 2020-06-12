@@ -1,5 +1,6 @@
 package applicationV1.controleur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -71,9 +72,8 @@ public class Controleur implements Initializable{
 			this.env.ajouterEnnemi(ennemi = new EnnemiLion(env));
 	}
 	@FXML
-    void nvlManche(ActionEvent event){
-		this.env.nouvelleManche();
-		
+    void nvlManche(ActionEvent event) throws IOException{
+		this.env.nouvelleManche();	
     }
 	void initTiles(){
 		for(int i = 0; i < this.env.getTerrain().length; i++) {
@@ -101,14 +101,12 @@ public class Controleur implements Initializable{
 			((StackPane)((RadioButton)t.getSelectedToggle()).getParent()).getChildren().get(0).setVisible(true);
 		}
 	}
-	void prout() {
-		spritePane.setOnMouseDragged(e->{
-			spritePane.setTranslateX(e.getX());
-		});;
-	}
 	public ImageView obtenirImage(int n) {
 		ImageView tile;
 		switch (n) {
+		case 'V':
+			tile = new ImageView("");
+			return tile;
 		case 'v':
 			tile = new ImageView("ressources/brick.png");
 			return tile;

@@ -24,17 +24,7 @@ public class Environnement {
 	private static int cptManche = 0;
 	private static IntegerProperty cptMancheGlobale = new SimpleIntegerProperty(0);
 	private static int difficulté = 1;
-	private char terrain[] = {'c','v','v','v','v','v','v','v','v','v',
-							'c','v','v','v','v','v','v','v','v','v',
-							'c','c','c','v','v','c','c','c','v','v',
-							'v','t','c','v','v','c','t','c','v','v',
-							'v','v','c','c','c','c','v','c','v','v',
-							'v','v','v','v','v','v','v','c','v','v',
-							'v','v','v','v','v','v','v','c','v','v',
-							'v','v','v','v','v','v','v','c','c','v',
-							'v','v','v','v','v','v','v','t','c','v',
-							'v','v','v','v','v','v','v','v','c','c'};
-	private char terrain2D[][] = tab2D(terrain,10,10);
+	private char terrain2D[][] = Config.tab2D();
 	
 	public Environnement() {
 		this.ennemis = FXCollections.observableArrayList();
@@ -65,18 +55,6 @@ public class Environnement {
 	public char[][] getTerrain2D() {
 		return terrain2D;
 	}
-	
-	private char[][] tab2D(char[] n, int ligne, int colonne) {
-		char[][] tab = new char[ligne][colonne];
-		int indice =0;
-		for(int i = 0; i < ligne; i++){
-			for(int j=0; j< colonne; j++ ){
-				tab[i][j] = n[indice];
-	          	indice++;
-			}
-		}
-		return tab;
-	 }
 	public void nouvelleManche() {
 		this.manche = new Manche(cptManche,difficulté, this);
 		this.manche.exeManche();
