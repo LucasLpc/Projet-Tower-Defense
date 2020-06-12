@@ -80,6 +80,7 @@ public class Ennemi extends Acteur{
 	public void agir() {
 		if(estMort()) {
 			this.env.delEnnemi(this.getId());
+			this.env.getBanque().ajouterSolde(10);
 		}
 		else if (estArrive()) {
 			atteindreFin();
@@ -149,7 +150,7 @@ public class Ennemi extends Acteur{
 	
 	public void atteindreFin() {
 		this.env.delEnnemi(this.getId());
-		this.env.getBase().subirDegats(10);
+		this.env.getBase().subirDegats(1);
 	}
 	
 	public void refreshAngle() {

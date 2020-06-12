@@ -21,6 +21,7 @@ public class Environnement {
 	private Bfs bfs;
 	private Base base;
 	private Manche manche;
+	private Banque banque;
 	private static int cptManche = 0;
 	private static IntegerProperty cptMancheGlobale = new SimpleIntegerProperty(0);
 	private static int difficulté = 1;
@@ -32,6 +33,7 @@ public class Environnement {
 		this.tirs = FXCollections.observableArrayList();
 		this.base = new Base(9, 9, 9*64, 9*64, 50, this);
 		this.bfs = new Bfs(this);
+		this.banque = new Banque();
 		this.manche = new Manche(1,0,this);
 	}
 	public IntegerProperty getCptMancheGlobaleProperty() {
@@ -42,6 +44,12 @@ public class Environnement {
 	}
 	public int getCptMancheGlobale() {
 		return cptMancheGlobale.getValue();
+	}
+	public Banque getBanque() {
+		return banque;
+	}
+	public void setBanque(Banque banque) {
+		this.banque = banque;
 	}
 	public Manche getManche() {
 		return manche;
@@ -83,11 +91,12 @@ public class Environnement {
 		}
 		this.nbTours += 1;
 	}
-
 	public void ajouterTourelle(Tourelle t) {
 		this.tourelles.add(t);
 	}
-	
+	public void enleverTourelle(Tourelle t) {
+		this.tourelles.remove(t);
+	}	
 	public void ajouterEnnemi(Ennemi e) {
 		this.ennemis.add(e);
 	}
@@ -95,7 +104,6 @@ public class Environnement {
 	public void ajouterTir(Tir t) {
 		this.tirs.add(t);
 	}
-	
 	public void delEnnemi(String id) {
 		for(int i = getNbEnnemis()-1 ; i >= 0; i--) {
 			if(getEnnemis().get(i).getId() == id) {
@@ -103,7 +111,6 @@ public class Environnement {
 			}
 		}
 	}
-	
 	public void delTir(String id) {
 		for(int i = getNbTirs()-1 ; i >= 0; i--) {
 			if(getTirs().get(i).getId() == id) {

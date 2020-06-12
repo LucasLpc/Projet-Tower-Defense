@@ -56,6 +56,8 @@ public class Controleur implements Initializable{
     private Label labelNbManche;
 	@FXML
     private ToggleGroup TourelleToggle;
+    @FXML
+    private Label labelBourse;
 
 	@FXML
 	void ajouterActeur(ActionEvent event) {
@@ -128,21 +130,28 @@ public class Controleur implements Initializable{
 					t = new TourelleSniper((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,this.env);
 				if(s.contentEquals("tLG"))
 					t = new TourelleLanceGrenade((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,this.env);
-				this.env.ajouterTourelle(t);
-				tile.setMouseTransparent(true);
+				if(this.env.getBanque().achetable(t.getPrix())) {
+					this.env.getBanque().acheter(t.getPrix());
+					this.env.ajouterTourelle(t);
+				}
+				else System.out.println("pas de sous");
+				
 			});
 			return tile;
 		default:
 			return null;
 		}
 	}
-	
+	public void initBinds() {
+		labelNbManche.textProperty().bind(this.env.getCptMancheGlobaleProperty().asString());
+		labelBourse.textProperty().bind(this.env.getBanque().getBourseProperty().asString());
+	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		System.out.println("initialisation");
 		this.env = new Environnement();
-		labelNbManche.textProperty().bind(this.env.getCptMancheGlobaleProperty().asString());
+		initBinds();
 		initTiles();
 		initTour();
 		gameloop.play();

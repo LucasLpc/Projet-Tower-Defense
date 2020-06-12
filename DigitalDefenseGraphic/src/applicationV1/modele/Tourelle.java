@@ -9,13 +9,15 @@ public class Tourelle extends Acteur{
 	private int degats;
 	private int portee;
 	private DoubleProperty angle;
+	private int prix;
 
-	public Tourelle(int x, int y, int deg, int port, Environnement env) {
+	public Tourelle(int x, int y, int deg, int port, Environnement env, int prix) {
 		// Creation d'une tourelle sur une position donnee.
 		super(x, y, x*64, y*64, env);
 		this.degats = deg;
 		this.portee = port;
 		this.angle = new SimpleDoubleProperty(0);
+		this.prix = prix;
 	}
 
 	public void agir() {
@@ -31,7 +33,9 @@ public class Tourelle extends Acteur{
 			} while (j < this.env.getNbEnnemis());
 		}
 	}
-	
+	public int getPrix() {
+		return this.prix;
+	}
 	public double getAngle() {
 		return this.angle.getValue();
 	}

@@ -6,7 +6,7 @@ import applicationV1.modele.Tourelle;
 public class TourelleShotgun extends Tourelle{
 
 	public TourelleShotgun(int x, int y, Environnement env) {
-		super(x, y, 100, 2, env);
+		super(x, y, 100, 2, env, 40);
 	}
 
 }

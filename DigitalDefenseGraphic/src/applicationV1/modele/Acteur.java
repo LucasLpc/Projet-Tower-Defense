@@ -59,6 +59,10 @@ public abstract class Acteur {
 	
 	public abstract void agir();
 	
+	public Environnement getEnv() {
+		return this.env;
+	}
+	
 	public String getId() {
 		return this.id;
 	}

@@ -1,6 +1,7 @@
 package applicationV1.controleur;
 
 import applicationV1.modele.Acteur;
+import applicationV1.modele.Environnement;
 import applicationV1.modele.Tourelle;
 import applicationV1.modele.EnnemiType.EnnemiBear;
 import applicationV1.modele.EnnemiType.EnnemiCoyote;
@@ -34,10 +35,12 @@ public class ObservateurTourelles implements ListChangeListener<Tourelle>{
 			r = new ImageView("ressources/Tourelles/tourelleSniper.png");
 		if(t instanceof TourelleLanceGrenade)
 			r = new ImageView("ressources/Tourelles/tourelleLanceGrenade.png");
-		r.setOnMouseClicked((e) -> System.out.println(t));
 		//à modifier
 		r.translateXProperty().bind(t.getX64Property());
 		r.translateYProperty().bind(t.getY64Property());
+		r.setOnMouseClicked(e->{
+			t.getEnv().getTourelles().remove(t);
+		});
 		r.rotateProperty().bind(t.getAngleProperty());
 		System.out.println();
 		r.setId(t.getId());

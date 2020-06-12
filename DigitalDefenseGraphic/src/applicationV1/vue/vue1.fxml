@@ -45,6 +45,8 @@
             </VBox>
             <Label text="Vous êtes à la manche :" />
             <Label fx:id="labelNbManche" style="-fx-font-family: Carlito;" />
+            <Label text="Vos Okanes :" />
+            <Label fx:id="labelBourse" />
          </children></VBox>
    </right>
    <center>
@@ -54,4 +56,7 @@
          </children>
       </Pane>
    </center>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="encadre" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
