@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.Queue;
 
 import applicationV1.modele.EnnemiType.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -18,6 +20,10 @@ public class Environnement {
 	private int nbTours;
 	private Bfs bfs;
 	private Base base;
+	private Manche manche;
+	private static int cptManche = 0;
+	private static IntegerProperty cptMancheGlobale = new SimpleIntegerProperty(0);
+	private static int difficulté = 1;
 	private char terrain[] = {'c','v','v','v','v','v','v','v','v','v',
 							'c','v','v','v','v','v','v','v','v','v',
 							'c','c','c','v','v','c','c','c','v','v',
@@ -36,6 +42,19 @@ public class Environnement {
 		this.tirs = FXCollections.observableArrayList();
 		this.base = new Base(9, 9, 9*64, 9*64, 50, this);
 		this.bfs = new Bfs(this);
+		this.manche = new Manche(1,0,this);
+	}
+	public IntegerProperty getCptMancheGlobaleProperty() {
+		return cptMancheGlobale;
+	}
+	public void setCptMancheGlobale(int v) {
+		cptMancheGlobale.setValue(v);
+	}
+	public int getCptMancheGlobale() {
+		return cptMancheGlobale.getValue();
+	}
+	public Manche getManche() {
+		return manche;
 	}
 	public Base getBase() {
 		return base;
@@ -58,6 +77,18 @@ public class Environnement {
 		}
 		return tab;
 	 }
+	public void nouvelleManche() {
+		this.manche = new Manche(cptManche,difficulté, this);
+		this.manche.exeManche();
+		int cpt = cptManche;
+		System.out.println(cptManche);
+		if(cpt+1 == 5) {
+			cptManche=0;
+			difficulté++;
+		}
+		else cptManche++;	
+		cptMancheGlobale.setValue(cptMancheGlobale.getValue()+1);
+	}
 	
 	public void unTour() {
 		// Cette mï¿½thode permet le dï¿½roulï¿½ d'un tour de jeu (attention ici un tour de jeu dï¿½signe 1 action par acteur, dï¿½placement ou attaquer)

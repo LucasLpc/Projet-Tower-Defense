@@ -30,8 +30,8 @@
                   <RadioButton mnemonicParsing="false" text="Bear" toggleGroup="$EnnemiToggle" />
                   <RadioButton mnemonicParsing="false" text="Lion" toggleGroup="$EnnemiToggle" />
                   <Button mnemonicParsing="false" onAction="#ajouterActeur" text="Ajouter" />
-                  <Button mnemonicParsing="false" text="Incr. la manche" />
-                  <Button mnemonicParsing="false" text="Finir la manche (killall)" />
+                  <Button mnemonicParsing="false" onAction="#nvlManche" text="Nouvelle Manche  " />
+                  <Button mnemonicParsing="false" text="killall" />
                   <RadioButton fx:id="radioBasique" mnemonicParsing="false" text="tBasique">
                      <toggleGroup>
                         <ToggleGroup fx:id="TourelleToggle" />
@@ -43,6 +43,8 @@
                   <RadioButton fx:id="radioLG" mnemonicParsing="false" text="tLG" toggleGroup="$TourelleToggle" />
                </children>
             </VBox>
+            <Label text="Vous êtes à la manche :" />
+            <Label fx:id="labelNbManche" style="-fx-font-family: Carlito;" />
          </children></VBox>
    </right>
    <center>

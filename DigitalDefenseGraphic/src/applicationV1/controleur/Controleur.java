@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -49,16 +50,9 @@ public class Controleur implements Initializable{
 	@FXML
 	private ToggleGroup EnnemiToggle;
 	@FXML
-	private TilePane tileMap;
-	 
-//	@FXML
-//	private RadioButton radioLG;
-//	@FXML
-//	private RadioButton radioShotgun;
-//	@FXML
-//	private RadioButton radioMinigun;
-//	@FXML
-//	private RadioButton radioSniper;
+	private TilePane tileMap;	 
+	@FXML
+    private Label labelNbManche;
 	@FXML
     private ToggleGroup TourelleToggle;
 
@@ -76,6 +70,11 @@ public class Controleur implements Initializable{
 		if(nomBouton.equals("Lion"))
 			this.env.ajouterEnnemi(ennemi = new EnnemiLion(env));
 	}
+	@FXML
+    void nvlManche(ActionEvent event){
+		this.env.nouvelleManche();
+		
+    }
 	void initTiles(){
 		for(int i = 0; i < this.env.getTerrain().length; i++) {
 			for(int j = 0; j < this.env.getTerrain()[0].length; j++) {
@@ -101,8 +100,11 @@ public class Controleur implements Initializable{
 			System.out.println(t.getSelectedToggle());
 			((StackPane)((RadioButton)t.getSelectedToggle()).getParent()).getChildren().get(0).setVisible(true);
 		}
-		
-		
+	}
+	void prout() {
+		spritePane.setOnMouseDragged(e->{
+			spritePane.setTranslateX(e.getX());
+		});;
 	}
 	public ImageView obtenirImage(int n) {
 		ImageView tile;
@@ -142,6 +144,7 @@ public class Controleur implements Initializable{
 		// TODO Auto-generated method stub
 		System.out.println("initialisation");
 		this.env = new Environnement();
+		labelNbManche.textProperty().bind(this.env.getCptMancheGlobaleProperty().asString());
 		initTiles();
 		initTour();
 		gameloop.play();
