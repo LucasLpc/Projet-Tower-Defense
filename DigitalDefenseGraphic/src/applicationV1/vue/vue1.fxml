@@ -70,10 +70,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="235.0">
                <children>
-                  <RadioButton mnemonicParsing="false" text="eChoc">
+                  <RadioButton mnemonicParsing="false" selected="true" text="eNul">
                      <toggleGroup>
                         <ToggleGroup fx:id="EffetToggle" />
-                     </toggleGroup></RadioButton>
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="eChoc" toggleGroup="$EffetToggle" />
                   <RadioButton mnemonicParsing="false" text="eBrulure" toggleGroup="$EffetToggle" />
                   <RadioButton mnemonicParsing="false" text="eGel" toggleGroup="$EffetToggle" />
                   <RadioButton mnemonicParsing="false" text="eGaz" toggleGroup="$EffetToggle" />

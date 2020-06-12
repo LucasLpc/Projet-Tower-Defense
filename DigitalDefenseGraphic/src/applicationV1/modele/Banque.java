@@ -7,7 +7,7 @@ public class Banque {
 	private IntegerProperty bourse;
 	private double multiplicateur = 1;
 	public Banque() {
-		this.bourse = new SimpleIntegerProperty(1000);
+		this.bourse = new SimpleIntegerProperty(50);
 	}
 	public Banque(int v) {
 		this.bourse = new SimpleIntegerProperty(v);

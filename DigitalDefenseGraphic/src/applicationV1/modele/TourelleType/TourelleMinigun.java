@@ -8,7 +8,7 @@ import applicationV1.modele.TirType.TirBasique;
 public class TourelleMinigun extends Tourelle{
 
 	public TourelleMinigun(int x, int y, Environnement env) {
-		super(x, y, 1, 4, 100, env, 20);
+		super(x, y, 5, 4, 100, env, 20);
 	}
 	
 

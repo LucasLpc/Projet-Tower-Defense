@@ -34,8 +34,8 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import applicationV1.modele.*;
+import applicationV1.modele.EffetsTypes.*;
 import applicationV1.modele.EnnemiType.*;
-import applicationV1.modele.TirType.TirSniper;
 import applicationV1.modele.TourelleType.TourelleBasique;
 import applicationV1.modele.TourelleType.TourelleLanceGrenade;
 import applicationV1.modele.TourelleType.TourelleMinigun;
@@ -49,6 +49,8 @@ public class Controleur implements Initializable{
 
 	@FXML
 	private Pane spritePane;
+	@FXML
+	private ToggleGroup EffetToggle;
 	@FXML
 	private ToggleGroup EnnemiToggle;
 	@FXML
@@ -85,28 +87,23 @@ public class Controleur implements Initializable{
 		for(Ennemi e : this.env.getEnnemis()) e.mourrir();
 	}
 	void initTiles(){
-		System.out.println(this.env.getTerrain().length);
 		for(int i = 0; i < this.env.getTerrain().length; i++) {
 			for(int j = 0; j < this.env.getTerrain()[0].length; j++) {
 				this.tileMap.getChildren().add(obtenirImage(this.env.getTerrain()[i][j]));
 			}
 		}
-	}
-	void initSelection(ToggleGroup t) {		
-		((RadioButton)t.getToggles().get(0)).setGraphic(new ImageView("ressources/Tourelles/TourelleBasique.png"));
-		((RadioButton)t.getToggles().get(1)).setGraphic(new ImageView("ressources/Tourelles/TourelleMinigun.png"));
-		((RadioButton)t.getToggles().get(2)).setGraphic(new ImageView("ressources/Tourelles/TourelleShotgun.png"));
-		((RadioButton)t.getToggles().get(3)).setGraphic(new ImageView("ressources/Tourelles/TourelleSniper.png"));
-		((RadioButton)t.getToggles().get(4)).setGraphic(new ImageView("ressources/Tourelles/TourelleLanceGrenade.png"));
+	}   
+	void initSelectionTourelle() {		
+		((RadioButton)TourelleToggle.getToggles().get(0)).setGraphic(new ImageView("ressources/Tourelles/TourelleBasique.png"));
+		((RadioButton)TourelleToggle.getToggles().get(1)).setGraphic(new ImageView("ressources/Tourelles/TourelleMinigun.png"));
+		((RadioButton)TourelleToggle.getToggles().get(2)).setGraphic(new ImageView("ressources/Tourelles/TourelleShotgun.png"));
+		((RadioButton)TourelleToggle.getToggles().get(3)).setGraphic(new ImageView("ressources/Tourelles/TourelleSniper.png"));
+		((RadioButton)TourelleToggle.getToggles().get(4)).setGraphic(new ImageView("ressources/Tourelles/TourelleLanceGrenade.png"));
 		
-		for(Toggle to : t.getToggles()) {
+		for(Toggle to : TourelleToggle.getToggles()) {
 			RadioButton rb = (RadioButton)to;
 			rb.setTextFill(Color.TRANSPARENT);		
 		}
-//		if(t.getSelectedToggle() != null) {
-//			System.out.println(t.getSelectedToggle());
-//			((StackPane)((RadioButton)t.getSelectedToggle()).getParent()).getChildren().get(0).setVisible(true);
-//		}
 	}
 	public ImageView obtenirImage(int n) {
 		ImageView tile;
@@ -118,13 +115,14 @@ public class Controleur implements Initializable{
 			tile = new ImageView("ressources/brick.png");
 			return tile;
 		case 'c':
-			tile = new ImageView("ressources/sol.png");
+			tile = new ImageView("ressources/wood.png");
 			return tile;
 		case 't':
 			tile = new EmpTourelle();
 			tile.setOnMouseClicked((e) -> {
 				Tourelle t = null;
 				String s = ((RadioButton)TourelleToggle.getSelectedToggle()).getText();
+				String s1 = ((RadioButton)EffetToggle.getSelectedToggle()).getText();
 				if(s.contentEquals("tBasique"))
 					t = new TourelleBasique((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,this.env);
 				if(s.contentEquals("tMinigun"))
@@ -135,12 +133,23 @@ public class Controleur implements Initializable{
 					t = new TourelleSniper((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,this.env);
 				if(s.contentEquals("tLG"))
 					t = new TourelleLanceGrenade((int)tile.getLayoutX()/64,(int)tile.getLayoutY()/64,this.env);
+				
+				if(s1.contentEquals("eNul"))
+					t.setEffet(null);
+				if(s1.contentEquals("eChoc"))
+					t.setEffet(new EffetChoc());
+				if(s1.contentEquals("eBrulure"))
+					t.setEffet(new EffetFeu());
+				if(s1.contentEquals("eGaz"))
+					t.setEffet(new EffetGaz());
+				if(s1.contentEquals("eGaz"))
+					t.setEffet(new EffetGlace());
 				if(this.env.getBanque().achetable(t.getPrix())) {
 					this.env.getBanque().acheter(t.getPrix());
 					this.env.ajouterTourelle(t);
-					afficher("Vous avez acheter :" + "\n" + t.getType());
+					afficher("Vous avez acheté :" + "\n" + t.getType());
 				}
-				else afficher("Vous n'avez pas assez d'Okanes " + "\n" + "pour acheter cette Tourelle");
+				else afficher("Vous n'avez pas assez d'Okanes " + "\n" + "pour acheter cette " + t.getType());
 				
 			});
 			return tile;
@@ -155,6 +164,18 @@ public class Controleur implements Initializable{
 		labelNbManche.textProperty().bind(this.env.getCptMancheGlobaleProperty().asString());
 		labelBourse.textProperty().bind(this.env.getBanque().getBourseProperty().asString());
 	}
+	public void initSelectionEffet() {
+		((RadioButton)EffetToggle.getToggles().get(0)).setGraphic(new ImageView("ressources/Effets/EffetVide.png"));
+		((RadioButton)EffetToggle.getToggles().get(1)).setGraphic(new ImageView("ressources/Effets/EffetChoc.png"));
+		((RadioButton)EffetToggle.getToggles().get(2)).setGraphic(new ImageView("ressources/Effets/EffetFeu.png"));
+		((RadioButton)EffetToggle.getToggles().get(3)).setGraphic(new ImageView("ressources/Effets/EffetGlace.png"));
+		((RadioButton)EffetToggle.getToggles().get(4)).setGraphic(new ImageView("ressources/Effets/EffetGaz.png"));
+		
+		for(Toggle to : EffetToggle.getToggles()) {
+			RadioButton rb = (RadioButton)to;
+			rb.setTextFill(Color.TRANSPARENT);	
+		}	
+	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -167,7 +188,8 @@ public class Controleur implements Initializable{
 		this.env.getEnnemis().addListener(new ObservateurEnnemis(this.spritePane));
 		this.env.getTourelles().addListener(new ObservateurTourelles(this.spritePane));
 		this.env.getTirs().addListener(new ObservateurTirs(this.spritePane));
-		
+		initSelectionTourelle();
+		initSelectionEffet();
 	}
 	public void initTour() {
 		gameloop = new Timeline();
@@ -176,6 +198,5 @@ public class Controleur implements Initializable{
 			this.env.unTour();
 		}));
 		gameloop.getKeyFrames().add(kf);
-		
 	}
 }
