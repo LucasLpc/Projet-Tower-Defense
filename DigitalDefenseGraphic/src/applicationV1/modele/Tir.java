@@ -4,11 +4,13 @@ public class Tir extends Acteur{
 	
 	private int dmg;
 	private Ennemi cible;
+	private Effet effet;
 	
-	public Tir(int x, int y, Environnement env, int dmg, Ennemi cible) {
+	public Tir(int x, int y, Environnement env, int dmg, Ennemi cible, Effet effet) {
 		super(x, y, x*64+32, y*64+32, env);
 		this.dmg=dmg;
 		this.cible=cible;
+		this.effet = effet;
 	}
 	
 	@Override
@@ -17,6 +19,7 @@ public class Tir extends Acteur{
 		if(cibleAtteinte()) {
 			this.env.delTir(this.getId());
 			this.cible.perdreHp(this.dmg);
+			if(this.effet != null)this.cible.ajouterEffet(this.effet);
 		}
 	}
 	
@@ -43,7 +46,6 @@ public class Tir extends Acteur{
 				pente = deltaY64 / deltaX64;
 			}
 		}
-		System.out.println(pente);
 
 		if(deltaX64 > 0) {
 			this.setX64(this.getX64() + 1);

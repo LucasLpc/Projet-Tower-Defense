@@ -10,6 +10,7 @@ public abstract class Tourelle extends Acteur{
 	private int portee;
 	private DoubleProperty angle;
 	private int prix;
+	private Effet effet;
 
 	public Tourelle(int x, int y, int deg, int port, Environnement env, int prix) {
 		// Creation d'une tourelle sur une position donnee.
@@ -18,7 +19,10 @@ public abstract class Tourelle extends Acteur{
 		this.portee = port;
 		this.angle = new SimpleDoubleProperty(0);
 		this.prix = prix;
+		this.effet = null;
 	}
+	
+	public abstract String getType();
 
 	public void agir() {
 		int j = 0;
@@ -60,7 +64,7 @@ public abstract class Tourelle extends Acteur{
 	
 	public void attaquer(Ennemi e) {
 		if(this.env.getNbTours() % 100 == 0) {
-			Tir t = new Tir(this.getX(), this.getY(), this.env, this.degats, e);
+			Tir t = new Tir(this.getX(), this.getY(), this.env, this.degats, e, this.effet);
 			this.env.ajouterTir(t);
 		}
 	}
@@ -70,8 +74,15 @@ public abstract class Tourelle extends Acteur{
 		double yDist = e.getY64() - this.getY64();
 		this.setAngle((int)Math.toDegrees(-Math.atan2(xDist, yDist)));
 	}
-	public abstract String getType();
 	
+	public Effet getEffet() {
+		return effet;
+	}
+
+	public void setEffet(Effet effet) {
+		this.effet = effet;
+	}
+
 	@Override
 	public String toString() {
 		return "Tourelle [degats=" + degats + ", portee=" + portee + ", Angle : " + angle +  " " + super.toString() + "]";
