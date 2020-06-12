@@ -89,7 +89,7 @@ public class Controleur implements Initializable{
 				this.tileMap.getChildren().add(obtenirImage(this.env.getTerrain()[i][j]));
 			}
 		}
-	}   
+	}
 	void initSelection(ToggleGroup t) {		
 		((RadioButton)t.getToggles().get(0)).setGraphic(new ImageView("ressources/Tourelles/TourelleBasique.png"));
 		((RadioButton)t.getToggles().get(1)).setGraphic(new ImageView("ressources/Tourelles/TourelleMinigun.png"));

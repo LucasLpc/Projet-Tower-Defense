@@ -7,7 +7,9 @@ import java.util.Optional;
 import java.util.Queue;
 
 import applicationV1.modele.EnnemiType.*;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +19,14 @@ public class Environnement {
 	private ObservableList<Ennemi> ennemis;
 	private ObservableList<Tourelle> tourelles;
 	private ObservableList<Tir> tirs;
+	private BooleanProperty statutPartie;
 	private int nbTours;
 	private Bfs bfs;
 	private Base base;
 	private Manche manche;
 	private Banque banque;
 	private static int cptManche = 0;
-	private static IntegerProperty cptMancheGlobale = new SimpleIntegerProperty(0);
+	private static IntegerProperty cptMancheGlobale;
 	private static int difficulté = 1;
 	private char terrain2D[][] = Config.tab2D();
 	
@@ -35,6 +38,8 @@ public class Environnement {
 		this.bfs = new Bfs(this);
 		this.banque = new Banque();
 		this.manche = new Manche(1,0,this);
+		this.cptMancheGlobale = new SimpleIntegerProperty(0);
+		this.statutPartie = new SimpleBooleanProperty(true);
 	}
 	public IntegerProperty getCptMancheGlobaleProperty() {
 		return cptMancheGlobale;
@@ -65,7 +70,6 @@ public class Environnement {
 	}
 	public void nouvelleManche() {
 		this.manche = new Manche(cptManche,difficulté, this);
-		this.manche.exeManche();
 		int cpt = cptManche;
 		System.out.println(cptManche);
 		if(cpt+1 == 5) {
@@ -88,6 +92,14 @@ public class Environnement {
 		}
 		for(int k = 0; k < getNbTirs(); k++) {
 			this.tirs.get(k).agir();
+		}
+		if(manche.getEnnemis().size() > 0) {
+			if(this.getNbTours() % 200 == 0) {
+				manche.exeManche();
+			}
+		}
+		if(this.base.mort()) {
+			this.statutPartie.setValue(false);
 		}
 		this.nbTours += 1;
 	}

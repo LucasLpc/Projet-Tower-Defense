@@ -55,9 +55,8 @@ public class Manche {
 		}
 	}
 	public void exeManche() {
-		Ennemi ennemi;
 		for(int i=0;i<this.ennemis.size();i++) {
-			this.env.ajouterEnnemi(this.ennemis.remove(i));	
+			this.env.ajouterEnnemi(this.ennemis.remove(i));
 		}
 	}
 }
