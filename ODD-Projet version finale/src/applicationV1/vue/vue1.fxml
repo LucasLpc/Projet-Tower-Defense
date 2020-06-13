@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane styleClass="background" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationV1.controleur.Controleur">
+   <right>
+      <VBox prefHeight="235.0" prefWidth="182.0" styleClass="encadre" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="235.0" prefWidth="168.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="Coyote">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="EnnemiToggle" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="Hyena" toggleGroup="$EnnemiToggle" />
+                  <RadioButton mnemonicParsing="false" text="Bear" toggleGroup="$EnnemiToggle" />
+                  <RadioButton mnemonicParsing="false" text="Lion" toggleGroup="$EnnemiToggle" />
+                  <Button mnemonicParsing="false" onAction="#ajouterActeur" text="Ajouter" />
+                  <Button mnemonicParsing="false" onAction="#nvlManche" text="Nouvelle Manche  " />
+                  <Button mnemonicParsing="false" onAction="#killAllAction" text="killall" />
+                  <Label text="Prix : 5 Okanes" />
+                  <RadioButton fx:id="radioBasique" mnemonicParsing="false" text="tBasique">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="TourelleToggle" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <Label text="Prix :  20 Okanes" />
+                  <RadioButton fx:id="radioMinigun" mnemonicParsing="false" text="tMinigun" toggleGroup="$TourelleToggle" />
+                  <Label text="Prix : 40 Okanes" />
+                  <RadioButton fx:id="radioShotgun" mnemonicParsing="false" text="tShotgun" toggleGroup="$TourelleToggle" />
+                  <Label text="Prix : 60 Okanes" />
+                  <RadioButton fx:id="radioSniper" mnemonicParsing="false" text="tSniper" toggleGroup="$TourelleToggle" />
+                  <Label text="Prix : 50 Okanes" />
+                  <RadioButton fx:id="radioLG" mnemonicParsing="false" text="tLG" toggleGroup="$TourelleToggle" />
+               </children>
+            </VBox>
+            <Label text="Vous êtes à la manche :" />
+            <Label fx:id="labelNbManche" style="-fx-font-family: Carlito;" />
+            <Label text="Vos Okanes :" />
+            <Label fx:id="labelBourse" />
+         </children></VBox>
+   </right>
+   <center>
+      <Pane fx:id="spritePane" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+         <children>
+            <TilePane fx:id="tileMap" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" />
+         </children>
+      </Pane>
+   </center>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="encadre" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="150.0" prefWidth="122.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="ressources/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="235.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" selected="true" text="eNul">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="EffetToggle" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="eChoc" toggleGroup="$EffetToggle" />
+                  <RadioButton mnemonicParsing="false" text="eBrulure" toggleGroup="$EffetToggle" />
+                  <RadioButton mnemonicParsing="false" text="eGlace" toggleGroup="$EffetToggle" />
+                  <RadioButton mnemonicParsing="false" text="eGaz" toggleGroup="$EffetToggle" />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+               </HBox.margin>
+            </HBox>
+            <Label fx:id="lblText" alignment="CENTER" prefHeight="150.0" prefWidth="357.0" textAlignment="CENTER" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
